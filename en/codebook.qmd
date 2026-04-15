@@ -1,0 +1,113 @@
+---
+title: "Codebook"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/codebook.html" class="lang-btn active">EN</a>
+    <a href="../../es/codebook.html" class="lang-btn">ES</a>
+    <a href="../../ca/codebook.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Documentation</div>
+  <h1 class="page-header-title">Codebook</h1>
+  <p class="page-header-sub">Variable definitions, sources, and methodological notes</p>
+</div>
+
+<section class="content-section">
+  <div class="section-label">Dataset documentation</div>
+  <h2 class="section-title">How to read the data</h2>
+  <p class="section-body">
+    The codebook describes every variable in the dataset: how each was collected,
+    how it was coded, what the unit of analysis is, and any known limitations or
+    caveats. It is the essential companion to the electoral atlas and to the
+    underlying dataset.
+  </p>
+  <p class="section-body">
+    The full codebook is available as a PDF document below. It will be updated
+    as the dataset evolves.
+  </p>
+
+  <!-- PDF VIEWER -->
+  <!-- Once you have your PDF, replace the placeholder below with:
+       <iframe src="../../pdfs/codebook.pdf" class="codebook-embed"></iframe>
+  -->
+  <div class="codebook-placeholder">
+    <div class="codebook-placeholder-icon">📄</div>
+    <div class="codebook-placeholder-text">
+      Codebook PDF will appear here<br>
+      <span style="opacity:0.6;margin-top:0.4rem;display:block;">
+        Place your file at <code>pdfs/codebook.pdf</code> and uncomment the iframe
+      </span>
+    </div>
+  </div>
+
+  <!-- DOWNLOAD LINK -->
+  <div style="text-align:center;margin-top:1.5rem;">
+    <a href="../../pdfs/codebook.pdf" class="contact-submit" download>
+      ↓ &nbsp; Download Codebook (PDF)
+    </a>
+  </div>
+
+  <!-- VARIABLE SUMMARY TABLE -->
+  <div class="section-label mt-lg">Variable reference</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Key variables at a glance</h3>
+
+  <div style="overflow-x:auto;margin-top:1.5rem;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+      <thead>
+        <tr style="background:var(--ink);color:var(--parchment);">
+          <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Variable</th>
+          <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Description</th>
+          <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Range</th>
+          <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Available</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--aged);">
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">cod_muni</td>
+          <td style="padding:0.65rem 0.85rem;">Municipality identifier</td>
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">String</td>
+          <td style="padding:0.65rem 0.85rem;">All years</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--aged);background:rgba(245,240,232,0.4);">
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">left_[year]</td>
+          <td style="padding:0.65rem 0.85rem;">Vote share of left-wing parties</td>
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td>
+          <td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--aged);">
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">right_[year]</td>
+          <td style="padding:0.65rem 0.85rem;">Vote share of right-wing parties</td>
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td>
+          <td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--aged);background:rgba(245,240,232,0.4);">
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">other_[year]</td>
+          <td style="padding:0.65rem 0.85rem;">Vote share of other / regional parties</td>
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td>
+          <td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--aged);">
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">turnout_[year]</td>
+          <td style="padding:0.65rem 0.85rem;">Voter turnout (votes cast / registered voters)</td>
+          <td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td>
+          <td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Electoral Atlas of the Spanish Second Republic &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

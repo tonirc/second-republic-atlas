@@ -1,0 +1,79 @@
+---
+title: "Inici"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/" class="lang-btn">EN</a>
+    <a href="../../es/" class="lang-btn">ES</a>
+    <a href="../../ca/" class="lang-btn active">CA</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-flag-stripe"></div>
+  <div class="hero-year">Segona República Espanyola · 1931–1939</div>
+  <h1 class="hero-title">Atles Electoral de la<br><em>Segona República</em></h1>
+  <p class="hero-subtitle">Resultats electorals municipals, 1931 · 1933 · 1936</p>
+  <div class="hero-divider"></div>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="hero-meta-label">Eleccions</span><span class="hero-meta-value">3</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-label">Municipis</span><span class="hero-meta-value">~9.000</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-label">Període</span><span class="hero-meta-value">1931–36</span></div>
+  </div>
+</section>
+
+<div class="logo-bar">
+  <div class="logo-bar-item">
+    <div class="logo-placeholder">Logo UPF</div>
+    <span class="logo-caption">Universitat Pompeu Fabra</span>
+  </div>
+  <div class="logo-bar-divider"></div>
+  <div class="logo-bar-item">
+    <div class="logo-placeholder">Logo Ministeri</div>
+    <span class="logo-caption">Ministerio de Ciencia e Innovación</span>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="section-label">Sobre el projecte</div>
+  <h2 class="section-title">La geografia electoral de la<br>democràcia republicana</h2>
+  <p class="section-body">Aquest atles presenta els resultats de les tres eleccions generals celebrades durant la Segona República Espanyola (1931–1939) a nivell municipal. En cartografiar la geografia electoral de tota Espanya, es revelen els patrons territorials del suport polític i les profundes divisions que van marcar el destí de la República.</p>
+  <p class="section-body">Les dades cobreixen més de 9.000 municipis en les tres eleccions d'abril de 1931, novembre de 1933 i febrer de 1936, permetent comparar els canvis polítics entre regions, coalicions i períodes.</p>
+
+  <div class="election-cards">
+    <div class="election-card">
+      <div class="card-year">1931</div>
+      <div class="card-name">Coalició Republicano-Socialista</div>
+      <p class="card-desc">Les eleccions fundacionals. Una victòria aclaparadora de les forces republicanes i socialistes va posar fi a la monarquia i va establir la Segona República.</p>
+    </div>
+    <div class="election-card">
+      <div class="card-year">1933</div>
+      <div class="card-name">Victòria de les dretes</div>
+      <p class="card-desc">Les primeres eleccions amb sufragi femení. Una esquerra dividida va permetre que la CEDA i els radicals formessin un govern de centredreta.</p>
+    </div>
+    <div class="election-card">
+      <div class="card-year">1936</div>
+      <div class="card-name">Front Popular</div>
+      <p class="card-desc">L'esquerra reunida al Front Popular va derrotar ajustadament el Bloc Nacional. El resultat va ser disputat i va precedir la Guerra Civil.</p>
+    </div>
+  </div>
+
+  <div class="section-label mt-lg">Detalls del projecte</div>
+  <div class="info-grid">
+    <div class="info-item"><div class="info-item-label">Fonts de dades</div><div class="info-item-value">Registres electorals històrics, INE, arxius regionals</div></div>
+    <div class="info-item"><div class="info-item-label">Geografia</div><div class="info-item-value">Límits municipals històrics, anys 1930</div></div>
+    <div class="info-item"><div class="info-item-label">Eina cartogràfica</div><div class="info-item-value">Maplibre GL JS</div></div>
+    <div class="info-item"><div class="info-item-label">Construït amb</div><div class="info-item-value">R · Quarto · GitHub Pages</div></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Atles Electoral de la Segona República Espanyola &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

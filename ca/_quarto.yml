@@ -1,0 +1,37 @@
+project:
+  type: website
+  output-dir: ../docs/ca
+  resources:
+    - "../data/*"
+
+website:
+  title: "Atles Electoral · Segona República"
+  navbar:
+    background: light
+    left:
+      - href: index.qmd
+        text: "Inici"
+      - href: map.qmd
+        text: "Mapa"
+      - href: codebook.qmd
+        text: "Llibre de codis"
+      - href: contribute.qmd
+        text: "Contribuir"
+      - href: about.qmd
+        text: "Sobre el projecte"
+      - href: book.qmd
+        text: "El Llibre"
+    right:
+      - text: "EN"
+        href: "../en/"
+      - text: "ES"
+        href: "../es/"
+      - text: "CA"
+        href: "../ca/"
+
+format:
+  html:
+    theme: none
+    css: "styles.css"
+    toc: false
+    page-layout: full

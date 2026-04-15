@@ -1,0 +1,159 @@
+---
+title: "Contribute"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/contribute.html" class="lang-btn active">EN</a>
+    <a href="../../es/contribute.html" class="lang-btn">ES</a>
+    <a href="../../ca/contribute.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Community</div>
+  <h1 class="page-header-title">Contribute to the Atlas</h1>
+  <p class="page-header-sub">Report errors, share new data, or get in touch</p>
+</div>
+
+<section class="content-section">
+  <div class="contact-grid">
+
+    <!-- LEFT: Form -->
+    <div>
+      <div class="section-label">Send a message</div>
+      <h2 class="section-title" style="font-size:1.4rem;">Found an error?<br>Have more data?</h2>
+      <p class="section-body" style="font-size:0.9rem;">
+        This dataset is a work in progress. If you spot an error in the election results,
+        know of additional sources, or have data that could improve coverage, we would love
+        to hear from you. Use the form below — it opens your email client with the
+        relevant fields pre-filled.
+      </p>
+
+      <!-- Type selector -->
+      <div class="contact-form-group">
+        <label class="contact-label">Type of contribution</label>
+        <select class="contact-select" id="msg-type" onchange="updateSubject()">
+          <option value="error">Report a data error</option>
+          <option value="data">Provide additional data</option>
+          <option value="source">Suggest a new source</option>
+          <option value="other">General enquiry</option>
+        </select>
+      </div>
+
+      <div class="contact-form-group">
+        <label class="contact-label">Municipality (if applicable)</label>
+        <input type="text" class="contact-input" id="muni-name" placeholder="e.g. Lleida, Teruel, Badajoz…">
+      </div>
+
+      <div class="contact-form-group">
+        <label class="contact-label">Election year (if applicable)</label>
+        <select class="contact-select" id="election-year">
+          <option value="">All years</option>
+          <option value="1931">1931</option>
+          <option value="1933">1933</option>
+          <option value="1936">1936</option>
+        </select>
+      </div>
+
+      <div class="contact-form-group">
+        <label class="contact-label">Your message</label>
+        <textarea class="contact-textarea" id="msg-body"
+          placeholder="Please describe the error, the new data, or your question in as much detail as possible…"></textarea>
+      </div>
+
+      <a id="send-btn" href="#" class="contact-submit" onclick="sendEmail(event)">
+        ✉ &nbsp; Send via email
+      </a>
+
+      <p style="font-family:var(--font-mono);font-size:0.62rem;color:var(--muted);margin-top:1rem;letter-spacing:0.06em;">
+        This will open your default email client. No data is stored on this website.
+      </p>
+    </div>
+
+    <!-- RIGHT: Info blocks -->
+    <div>
+      <div class="section-label">Contact information</div>
+
+      <div class="contact-info-block">
+        <div class="contact-info-label">Principal investigator</div>
+        <div class="contact-info-value">Your Name</div>
+        <div class="contact-info-sub">Department of Political and Social Sciences<br>Universitat Pompeu Fabra</div>
+      </div>
+
+      <div class="contact-info-block">
+        <div class="contact-info-label">Email</div>
+        <div class="contact-info-value">
+          <a href="mailto:yourname@upf.edu" style="color:var(--republic);">yourname@upf.edu</a>
+        </div>
+        <div class="contact-info-sub">Response within 5–7 working days</div>
+      </div>
+
+      <div class="contact-info-block">
+        <div class="contact-info-label">What we welcome</div>
+        <div class="contact-info-sub" style="font-size:0.85rem;line-height:1.7;">
+          ✓ &nbsp; Corrections to vote totals or shares<br>
+          ✓ &nbsp; Missing municipalities<br>
+          ✓ &nbsp; Links to archival sources<br>
+          ✓ &nbsp; Scanned primary documents<br>
+          ✓ &nbsp; Regional or provincial datasets
+        </div>
+      </div>
+
+      <div class="contact-info-block">
+        <div class="contact-info-label">Citation</div>
+        <div class="contact-info-sub" style="font-family:var(--font-mono);font-size:0.7rem;line-height:1.6;">
+          Author (2025). <em>Electoral Atlas of the Spanish Second Republic</em>.
+          Universitat Pompeu Fabra. [online]
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Electoral Atlas of the Spanish Second Republic &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+
+<script>
+const CONTACT_EMAIL = 'yourname@upf.edu';  // ← change this
+
+const typeSubjects = {
+  error:  'Data error report — Electoral Atlas',
+  data:   'Additional data — Electoral Atlas',
+  source: 'Source suggestion — Electoral Atlas',
+  other:  'Enquiry — Electoral Atlas',
+};
+
+function updateSubject() {
+  // Just used internally; subject is set at send time
+}
+
+function sendEmail(e) {
+  e.preventDefault();
+  const type  = document.getElementById('msg-type').value;
+  const muni  = document.getElementById('muni-name').value.trim();
+  const year  = document.getElementById('election-year').value;
+  const body  = document.getElementById('msg-body').value.trim();
+
+  let subject = typeSubjects[type];
+  if (muni) subject += ` · ${muni}`;
+  if (year) subject += ` (${year})`;
+
+  let mailBody = body;
+  if (muni || year) {
+    mailBody = `Municipality: ${muni || 'N/A'}\nElection year: ${year || 'N/A'}\n\n${body}`;
+  }
+
+  const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+  window.location.href = mailto;
+}
+</script>
+```

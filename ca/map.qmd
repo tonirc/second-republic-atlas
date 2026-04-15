@@ -1,0 +1,192 @@
+---
+title: "Mapa"
+format:
+  html:
+    page-layout: full
+    include-in-header:
+      text: |
+        <link href="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.css" rel="stylesheet">
+        <script src="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.js"></script>
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../en/map.html" class="lang-btn">EN</a>
+    <a href="../es/map.html" class="lang-btn">ES</a>
+    <a href="../ca/map.html" class="lang-btn active">CA</a>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="map-toolbar">
+  <span class="toolbar-label">Any:</span>
+  <button class="year-btn" onclick="setYear(1931, this)">1931</button>
+  <button class="year-btn" onclick="setYear(1933, this)">1933</button>
+  <button class="year-btn active" onclick="setYear(1936, this)">1936</button>
+  <div class="toolbar-sep"></div>
+  <span class="toolbar-label">Mostrar:</span>
+  <button class="var-btn active" onclick="setVar('left', this)">Esquerra</button>
+  <button class="var-btn" onclick="setVar('right', this)">Dreta</button>
+  <button class="var-btn" onclick="setVar('basque', this)">Nac. basc</button>
+  <button class="var-btn" onclick="setVar('centrist', this)">Centre</button>
+  <button class="var-btn" onclick="setVar('other', this)">Altres</button>
+  <button class="var-btn" onclick="setVar('blank_null', this)">Blancs/Nuls</button>
+  <button class="var-btn" onclick="setVar('turnout', this)">Participació</button>
+  <span class="toolbar-label" style="margin-left:auto;opacity:0.5;font-size:0.6rem;">Passeu el cursor per un municipi per veure els detalls</span>
+</div>
+
+<!-- MAP -->
+<div class="map-container">
+  <div id="map"></div>
+  <div class="map-legend">
+    <div class="legend-title" id="legend-title">Coalició d'esquerres</div>
+    <div class="legend-gradient" id="legend-gradient"
+      style="background:linear-gradient(to right,#d73027,#fc8d59,#ffffbf,#91cf60,#1a9850)"></div>
+    <div class="legend-gradient-labels"><span>0%</span><span>50%</span><span>100%</span></div>
+    <div class="legend-item" style="margin-top:0.6rem;">
+      <div class="legend-swatch" style="background:#cccccc"></div><span>Sense dades</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const VAR_CONFIG = {
+  left:      {
+    label: 'Coalició esquerres',
+    prop: (y) => `left_${y}`,
+    gradient: 'linear-gradient(to right,#d73027,#fc8d59,#ffffbf,#91cf60,#1a9850)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#d73027', 0.3,'#fc8d59', 0.5,'#ffffbf', 0.7,'#91cf60', 1,'#1a9850']
+  },
+  right:     {
+    label: 'Coalició dretes',
+    prop: (y) => `right_${y}`,
+    gradient: 'linear-gradient(to right,#1a9850,#91cf60,#ffffbf,#fc8d59,#d73027)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#1a9850', 0.3,'#91cf60', 0.5,'#ffffbf', 0.7,'#fc8d59', 1,'#d73027']
+  },
+  basque:    {
+    label: 'Coal. nac. basca',
+    prop: (y) => `basque_${y}`,
+    gradient: 'linear-gradient(to right,#fff7e6,#fed98e,#fe9929,#cc4c02,#7f2704)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#fff7e6', 0.1,'#fed98e', 0.3,'#fe9929', 0.6,'#cc4c02', 1,'#7f2704']
+  },
+  centrist:  {
+    label: 'Plataformes centristes',
+    prop: (y) => `centrist_${y}`,
+    gradient: 'linear-gradient(to right,#f0f9e8,#a8ddb5,#43a2ca,#0868ac)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#f0f9e8', 0.2,'#a8ddb5', 0.5,'#43a2ca', 1,'#0868ac']
+  },
+  other:     {
+    label: 'Altres partits',
+    prop: (y) => `other_${y}`,
+    gradient: 'linear-gradient(to right,#f7f7f7,#c2a5cf,#7b2d8b)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#f7f7f7', 0.3,'#c2a5cf', 0.6,'#9970ab', 1,'#7b2d8b']
+  },
+  blank_null:{
+    label: 'Vots en blanc i nuls',
+    prop: (y) => `blank_null_${y}`,
+    gradient: 'linear-gradient(to right,#f7f7f7,#969696,#252525)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#f7f7f7', 0.3,'#bdbdbd', 0.6,'#636363', 1,'#252525']
+  },
+  turnout:   {
+    label: 'Participació electoral',
+    prop: (y) => `turnout_${y}`,
+    gradient: 'linear-gradient(to right,#f7fbff,#6baed6,#08306b)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#f7fbff', 0.4,'#6baed6', 0.7,'#2171b5', 1,'#08306b']
+  },
+};
+
+let currentYear = 1936;
+let currentVar  = 'left';
+
+const map = new maplibregl.Map({
+  container: 'map',
+  style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+  center: [-3.7, 40.2], zoom: 5.5, minZoom: 4, maxZoom: 14
+});
+map.addControl(new maplibregl.NavigationControl(), 'top-left');
+map.addControl(new maplibregl.ScaleControl({unit: 'metric'}), 'bottom-left');
+const popup = new maplibregl.Popup({closeButton: false, closeOnClick: false, maxWidth: '300px'});
+
+function colorExpression() {
+  const cfg  = VAR_CONFIG[currentVar];
+  const prop = cfg.prop(currentYear);
+  return ['case', ['!', ['has', prop]], '#cccccc', ['==', ['get', prop], null], '#cccccc', cfg.ramp(prop)];
+}
+
+map.on('load', () => {
+  map.addSource('municipios', {type: 'geojson', data: '../municipios.geojson', generateId: true});
+  map.addLayer({id: 'municipios-fill', type: 'fill', source: 'municipios',
+    paint: {'fill-color': colorExpression(), 'fill-opacity': 0.82}});
+  map.addLayer({id: 'municipios-line', type: 'line', source: 'municipios',
+    paint: {'line-color': '#888', 'line-width': ['interpolate',['linear'],['zoom'],5,0.4,10,1.2], 'line-opacity': 0.7}});
+  map.addLayer({id: 'municipios-hover', type: 'fill', source: 'municipios',
+    paint: {'fill-color': '#000', 'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.12,0]}});
+
+  let hoveredId = null;
+  map.on('mousemove', 'municipios-fill', (e) => {
+    if (!e.features.length) return;
+    map.getCanvas().style.cursor = 'pointer';
+    if (hoveredId !== null) map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: false});
+    hoveredId = e.features[0].id;
+    map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: true});
+    popup.setLngLat(e.lngLat).setHTML(buildPopup(e.features[0].properties)).addTo(map);
+  });
+  map.on('mouseleave', 'municipios-fill', () => {
+    map.getCanvas().style.cursor = '';
+    if (hoveredId !== null) map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: false});
+    hoveredId = null;
+    popup.remove();
+  });
+});
+
+function buildPopup(p) {
+  const fmt = (v) => (v != null && v !== '') ? (parseFloat(v) * 100).toFixed(1) + '%' : '—';
+
+  const rows = Object.entries(VAR_CONFIG).map(([k, cfg]) => {
+    const bold = (currentVar === k) ? 'font-weight:600;color:#1a1208;' : '';
+    return `<tr>
+      <td style="font-family:'DM Mono',monospace;font-size:0.62rem;text-transform:uppercase;color:#6b5f4e;padding:0.1rem 0.6rem 0.1rem 0;${bold}">${cfg.label}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:0.72rem;text-align:right;${bold}">${fmt(p[cfg.prop(currentYear)])}</td>
+    </tr>`;
+  }).join('');
+
+  const estRow = (currentYear === 1936) ? `<tr>
+    <td style="font-family:'DM Mono',monospace;font-size:0.62rem;text-transform:uppercase;color:#6b5f4e;padding:0.1rem 0.6rem 0.1rem 0;">Participació (est.)</td>
+    <td style="font-family:'DM Mono',monospace;font-size:0.72rem;text-align:right;">${fmt(p['turnout_est_1936'])}</td>
+  </tr>` : '';
+
+  return `<div style="padding:0.25rem 0;">
+    <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:0.1rem;">${p.nombre || 'Municipi'}</div>
+    <div style="font-family:'DM Mono',monospace;font-size:0.6rem;text-transform:uppercase;color:#6b5f4e;margin-bottom:0.75rem;">${p.provincia || ''} · ${currentYear}</div>
+    <table style="width:100%;border-collapse:collapse;">${rows}${estRow}</table>
+  </div>`;
+}
+
+function setYear(year, btn) {
+  currentYear = year;
+  document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateMap();
+}
+
+function setVar(varKey, btn) {
+  currentVar = varKey;
+  document.querySelectorAll('.var-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateLegend(VAR_CONFIG[varKey].label, VAR_CONFIG[varKey].gradient);
+  updateMap();
+}
+
+function updateMap() {
+  if (map.getLayer('municipios-fill'))
+    map.setPaintProperty('municipios-fill', 'fill-color', colorExpression());
+}
+
+function updateLegend(label, gradient) {
+  document.getElementById('legend-title').textContent = label;
+  document.getElementById('legend-gradient').style.background = gradient;
+}
+</script>
+```

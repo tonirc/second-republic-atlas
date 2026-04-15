@@ -1,0 +1,112 @@
+---
+title: "Home"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/" class="lang-btn active">EN</a>
+    <a href="../../es/" class="lang-btn">ES</a>
+    <a href="../../ca/" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-flag-stripe"></div>
+  <div class="hero-year">Spanish Second Republic · 1931–1939</div>
+  <h1 class="hero-title">Electoral Atlas of the<br><em>Second Republic</em></h1>
+  <p class="hero-subtitle">Municipal election results, 1931 · 1933 · 1936</p>
+  <div class="hero-divider"></div>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Elections</span>
+      <span class="hero-meta-value">3</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Municipalities</span>
+      <span class="hero-meta-value">~9,000</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Years covered</span>
+      <span class="hero-meta-value">1931–36</span>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO BAR -->
+<div class="logo-bar">
+  <div class="logo-bar-item">
+    <img src="images/upf-logo.png" class="logo-img" alt="UPF">
+    <span class="logo-caption">Universitat Pompeu Fabra</span>
+  </div>
+  <div class="logo-bar-divider"></div>
+  <div class="logo-bar-item">
+    <img src="images/ministerio-logo.png" class="logo-img" alt="Ministerio de Ciencia">
+    <span class="logo-caption">Ministerio de Ciencia</span>
+  </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<section class="content-section">
+  <div class="section-label">About this project</div>
+  <h2 class="section-title">Mapping democracy at the<br>municipal level</h2>
+  <p class="section-body">
+    This atlas presents the results of the three general elections held during the Spanish
+    Second Republic (1931–1939) at the municipality level. By mapping electoral geography
+    across all of Spain, it reveals the territorial patterns of political support — and the
+    profound divisions that shaped the Republic's fate.
+  </p>
+  <p class="section-body">
+    The data covers over 9,000 municipalities across the three elections of April 1931,
+    November 1933, and February 1936, allowing comparison of political shifts across
+    regions, coalitions, and time.
+  </p>
+
+  <div class="election-cards">
+    <div class="election-card">
+      <div class="card-year">1931</div>
+      <div class="card-name">Republican–Socialist Coalition</div>
+      <p class="card-desc">The founding election. A landslide for republican and socialist forces brought an end to the monarchy and established the Second Republic.</p>
+    </div>
+    <div class="election-card">
+      <div class="card-year">1933</div>
+      <div class="card-name">Right-wing victory</div>
+      <p class="card-desc">The first election with women's suffrage. A divided left allowed the CEDA and the Radicals to form a centre-right government.</p>
+    </div>
+    <div class="election-card">
+      <div class="card-year">1936</div>
+      <div class="card-name">Popular Front</div>
+      <p class="card-desc">The left reunited under the Popular Front narrowly defeated the National Front. The result was disputed and preceded the Civil War.</p>
+    </div>
+  </div>
+
+  <div class="section-label mt-lg">Project details</div>
+  <div class="info-grid">
+    <div class="info-item">
+      <div class="info-item-label">Data sources</div>
+      <div class="info-item-value">Historical electoral records, INE, regional archives</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Geography</div>
+      <div class="info-item-value">Historical municipal boundaries, 1930s</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Mapping tool</div>
+      <div class="info-item-value">Maplibre GL JS</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Built with</div>
+      <div class="info-item-value">R · Quarto · GitHub Pages</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Electoral Atlas of the Spanish Second Republic &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; Data for research purposes &nbsp;·&nbsp; 2025</p>
+</footer>
+```

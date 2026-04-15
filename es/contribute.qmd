@@ -1,0 +1,109 @@
+---
+title: "Contribuir"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atlas Electoral · Segunda República Española · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/contribute.html" class="lang-btn">EN</a>
+    <a href="../../es/contribute.html" class="lang-btn active">ES</a>
+    <a href="../../ca/contribute.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Comunidad</div>
+  <h1 class="page-header-title">Contribuir al Atlas</h1>
+  <p class="page-header-sub">Reportar errores, compartir nuevos datos o ponerse en contacto</p>
+</div>
+
+<section class="content-section">
+  <div class="contact-grid">
+    <div>
+      <div class="section-label">Enviar un mensaje</div>
+      <h2 class="section-title" style="font-size:1.4rem;">¿Ha encontrado un error?<br>¿Tiene más datos?</h2>
+      <p class="section-body" style="font-size:0.9rem;">Este conjunto de datos está en construcción. Si detecta un error en los resultados electorales, conoce fuentes adicionales o dispone de datos que podrían mejorar la cobertura, nos encantaría saberlo.</p>
+
+      <div class="contact-form-group">
+        <label class="contact-label">Tipo de contribución</label>
+        <select class="contact-select" id="msg-type" onchange="updateSubject()">
+          <option value="error">Reportar un error de datos</option>
+          <option value="data">Aportar datos adicionales</option>
+          <option value="source">Sugerir una nueva fuente</option>
+          <option value="other">Consulta general</option>
+        </select>
+      </div>
+      <div class="contact-form-group">
+        <label class="contact-label">Municipio (si procede)</label>
+        <input type="text" class="contact-input" id="muni-name" placeholder="p.ej. Lleida, Teruel, Badajoz…">
+      </div>
+      <div class="contact-form-group">
+        <label class="contact-label">Año electoral (si procede)</label>
+        <select class="contact-select" id="election-year">
+          <option value="">Todos los años</option>
+          <option value="1931">1931</option>
+          <option value="1933">1933</option>
+          <option value="1936">1936</option>
+        </select>
+      </div>
+      <div class="contact-form-group">
+        <label class="contact-label">Su mensaje</label>
+        <textarea class="contact-textarea" id="msg-body" placeholder="Describa el error, los nuevos datos o su pregunta con el mayor detalle posible…"></textarea>
+      </div>
+      <a id="send-btn" href="#" class="contact-submit" onclick="sendEmail(event)">✉ &nbsp; Enviar por correo electrónico</a>
+      <p style="font-family:var(--font-mono);font-size:0.62rem;color:var(--muted);margin-top:1rem;">Esto abrirá su cliente de correo. No se almacenan datos en este sitio web.</p>
+    </div>
+
+    <div>
+      <div class="section-label">Información de contacto</div>
+      <div class="contact-info-block">
+        <div class="contact-info-label">Investigador principal</div>
+        <div class="contact-info-value">Su nombre</div>
+        <div class="contact-info-sub">Departamento de Ciencias Políticas y Sociales<br>Universitat Pompeu Fabra</div>
+      </div>
+      <div class="contact-info-block">
+        <div class="contact-info-label">Correo electrónico</div>
+        <div class="contact-info-value"><a href="mailto:yourname@upf.edu" style="color:var(--republic);">yourname@upf.edu</a></div>
+        <div class="contact-info-sub">Respuesta en 5–7 días laborables</div>
+      </div>
+      <div class="contact-info-block">
+        <div class="contact-info-label">Qué valoramos</div>
+        <div class="contact-info-sub" style="font-size:0.85rem;line-height:1.7;">
+          ✓ &nbsp; Correcciones en totales o porcentajes de voto<br>
+          ✓ &nbsp; Municipios ausentes<br>
+          ✓ &nbsp; Enlaces a fuentes de archivo<br>
+          ✓ &nbsp; Documentos primarios escaneados<br>
+          ✓ &nbsp; Conjuntos de datos regionales o provinciales
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Atlas Electoral de la Segunda República Española &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+
+<script>
+const CONTACT_EMAIL = 'yourname@upf.edu';
+const typeSubjects = { error: 'Error de datos — Atlas Electoral', data: 'Datos adicionales — Atlas Electoral', source: 'Sugerencia de fuente — Atlas Electoral', other: 'Consulta — Atlas Electoral' };
+function sendEmail(e) {
+  e.preventDefault();
+  const type = document.getElementById('msg-type').value;
+  const muni = document.getElementById('muni-name').value.trim();
+  const year = document.getElementById('election-year').value;
+  const body = document.getElementById('msg-body').value.trim();
+  let subject = typeSubjects[type];
+  if (muni) subject += ` · ${muni}`;
+  if (year) subject += ` (${year})`;
+  let mailBody = body;
+  if (muni || year) mailBody = `Municipio: ${muni||'N/A'}\nAño electoral: ${year||'N/A'}\n\n${body}`;
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+}
+</script>
+```

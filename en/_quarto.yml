@@ -1,0 +1,42 @@
+project:
+  type: website
+  output-dir: ../docs/en
+  resources:
+    - "../data/*"
+    - "../images/*"
+
+website:
+  title: "Electoral Atlas · Second Republic"
+  navbar:
+    background: light
+    left:
+      - href: index.qmd
+        text: "Home"
+      - href: map.qmd
+        text: "Map"
+      - href: codebook.qmd
+        text: "Codebook"
+      - href: contribute.qmd
+        text: "Contribute"
+      - href: about.qmd
+        text: "About"
+      - href: book.qmd
+        text: "The Book"
+    right:
+      - text: "EN"
+        href: "../en/"
+      - text: "ES"
+        href: "../es/"
+      - text: "CA"
+        href: "../ca/"
+
+format:
+  html:
+    theme: minimal
+    css: "styles.css"
+    toc: false
+    page-layout: full
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

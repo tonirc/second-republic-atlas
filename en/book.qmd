@@ -1,0 +1,152 @@
+---
+title: "The Book"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/book.html" class="lang-btn active">EN</a>
+    <a href="../../es/book.html" class="lang-btn">ES</a>
+    <a href="../../ca/book.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Publication</div>
+  <h1 class="page-header-title">The <em>Book</em> Project</h1>
+  <p class="page-header-sub">A monograph on the electoral geography of the Second Republic</p>
+</div>
+
+<section class="content-section">
+
+  <!-- BOOK FEATURE -->
+  <div class="book-feature">
+    <!-- Book cover placeholder — replace inner content with <img src="..." class="book-cover-img"> -->
+    <div class="book-cover">
+      <div class="book-cover-flag"></div>
+      <div class="book-cover-sub">Electoral Geography</div>
+      <div class="book-cover-title">Votes, Territory &amp; the Fall of the Republic</div>
+      <div class="book-cover-sub" style="margin-top:auto;">Your Name · 2025</div>
+    </div>
+
+    <!-- Book details -->
+    <div>
+      <div class="section-label">About the book</div>
+      <h2 class="section-title" style="font-size:1.5rem;">Votes, Territory, and the Fall of the Spanish Republic</h2>
+
+      <div class="book-meta-row">
+        <div class="book-meta-item">
+          <div class="book-meta-label">Author</div>
+          <div class="book-meta-value">Your Name</div>
+        </div>
+        <div class="book-meta-item">
+          <div class="book-meta-label">Publisher</div>
+          <div class="book-meta-value">TBA</div>
+        </div>
+        <div class="book-meta-item">
+          <div class="book-meta-label">Expected</div>
+          <div class="book-meta-value">2026</div>
+        </div>
+        <div class="book-meta-item">
+          <div class="book-meta-label">Language</div>
+          <div class="book-meta-value">English</div>
+        </div>
+      </div>
+
+      <p class="section-body" style="font-size:0.95rem;">
+        This book examines the territorial logic of political competition during the Spanish
+        Second Republic. Drawing on a new municipal-level dataset of electoral results
+        (1931–1936), it reconstructs how geography, class, religion, and local political
+        organisations shaped voting patterns — and how those patterns translated into
+        polarisation, democratic breakdown, and civil war.
+      </p>
+      <p class="section-body" style="font-size:0.95rem;">
+        This atlas is the interactive companion to the book. All maps and figures can be
+        explored here, and the underlying dataset is made freely available for replication
+        and further research.
+      </p>
+
+      <a href="#" class="book-cta">✉ &nbsp; Notify me on publication</a>
+      <a href="../../en/contribute.html" class="book-cta book-cta-outline">Contribute data</a>
+    </div>
+  </div>
+
+  <!-- CHAPTER LIST -->
+  <div class="section-label mt-lg">Contents</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Chapter outline</h3>
+  <div class="book-chapters">
+    <div class="chapter-item">
+      <div class="chapter-num">Intro</div>
+      <div>
+        <div class="chapter-title">Introduction: The Geography of Democracy</div>
+        <div class="chapter-desc">Why electoral geography matters for understanding the Republic's trajectory.</div>
+      </div>
+    </div>
+    <div class="chapter-item">
+      <div class="chapter-num">01</div>
+      <div>
+        <div class="chapter-title">Data and Methods</div>
+        <div class="chapter-desc">Sources, coding decisions, coverage, and limitations of the municipal dataset.</div>
+      </div>
+    </div>
+    <div class="chapter-item">
+      <div class="chapter-num">02</div>
+      <div>
+        <div class="chapter-title">April 1931: The Founding Election</div>
+        <div class="chapter-desc">How the republican coalition swept Spain and where it was already weak.</div>
+      </div>
+    </div>
+    <div class="chapter-item">
+      <div class="chapter-num">03</div>
+      <div>
+        <div class="chapter-title">November 1933: The Reversal</div>
+        <div class="chapter-desc">Women's suffrage, fragmented left, and the rise of CEDA in the countryside.</div>
+      </div>
+    </div>
+    <div class="chapter-item">
+      <div class="chapter-num">04</div>
+      <div>
+        <div class="chapter-title">February 1936: The Popular Front</div>
+        <div class="chapter-desc">A narrow popular vote majority, its geographic distribution, and its contested aftermath.</div>
+      </div>
+    </div>
+    <div class="chapter-item">
+      <div class="chapter-num">05</div>
+      <div>
+        <div class="chapter-title">Electoral Geography and the Civil War</div>
+        <div class="chapter-desc">Does the 1936 electoral map predict the geography of the 1936–1939 conflict?</div>
+      </div>
+    </div>
+    <div class="chapter-item">
+      <div class="chapter-num">Concl.</div>
+      <div>
+        <div class="chapter-title">Conclusion: Democracy, Territory, and Polarisation</div>
+        <div class="chapter-desc">Comparative implications for interwar Europe and contemporary democracies.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED PUBLICATIONS -->
+  <div class="section-label mt-lg">Related outputs</div>
+  <div class="info-grid" style="grid-template-columns:1fr;">
+    <div class="info-item">
+      <div class="info-item-label">Working paper</div>
+      <div class="info-item-value" style="font-size:0.9rem;">"Municipal-Level Electoral Returns in the Spanish Second Republic: A New Dataset." 2024. <a href="#">Download</a></div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Conference paper</div>
+      <div class="info-item-value" style="font-size:0.9rem;">Presented at APSA 2024, ECPR 2024. Slides available on request.</div>
+    </div>
+  </div>
+
+</section>
+
+<footer class="site-footer">
+  <p>Electoral Atlas of the Spanish Second Republic &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

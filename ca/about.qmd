@@ -1,0 +1,75 @@
+---
+title: "Sobre el projecte"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/about.html" class="lang-btn">EN</a>
+    <a href="../../es/about.html" class="lang-btn">ES</a>
+    <a href="../../ca/about.html" class="lang-btn active">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">L'equip</div>
+  <h1 class="page-header-title">Sobre el Projecte</h1>
+  <p class="page-header-sub">Qui som i què tractem d'entendre</p>
+</div>
+
+<section class="content-section">
+  <div class="section-label">La recerca</div>
+  <h2 class="section-title">Per què cartografiar les eleccions de la Segona República?</h2>
+  <p class="section-body">La Segona República Espanyola (1931–1939) va celebrar tres eleccions parlamentàries sota sufragi universal — incloses les primeres eleccions a Espanya en què les dones van poder votar (1933). Aquestes eleccions van tenir lloc en un context d'alta polarització i els seus resultats han estat objecte d'intens debat històric i polític des d'aleshores.</p>
+  <p class="section-body">Tanmateix, les dades completes i sistemàtiques a nivell municipal per a les tres eleccions mai no s'havien recopilat en un únic conjunt de dades coherent i d'accés obert. Aquest projecte omple aquest buit.</p>
+
+  <div class="pull-quote">
+    <p>«La geografia de les eleccions de la República codifica la geografia de la Guerra Civil que va seguir. Per entendre l'una, cal entendre l'altra.»</p>
+    <cite>Descripció del projecte, 2024</cite>
+  </div>
+
+  <div class="section-label mt-lg">Història del projecte</div>
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-text">Projecte concebut com a part d'un programa de recerca més ampli sobre l'economia política del període d'entreguerres a Europa.</div></div>
+    <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-text">Primera fase de recollida de dades d'arxiu: capitals de província i municipis grans digitalitzats a partir de la Gaceta de Madrid.</div></div>
+    <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-text">Finançament obtingut. Recollida de dades ampliada a les 50 províncies.</div></div>
+    <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-text">Versió beta de l'atles publicada. Llibre de codis i article metodològic enviats a revisió per parells.</div></div>
+    <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-text">Publicació pública del conjunt de dades complet i d'aquest atles interactiu.</div></div>
+  </div>
+
+  <div class="section-label mt-lg">L'equip</div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">VN</div>
+      <div class="team-name">El vostre nom</div>
+      <div class="team-role">Investigador/a Principal</div>
+      <p class="team-bio">Professor/a associat/da al Departament de Ciències Polítiques i Socials de la Universitat Pompeu Fabra. Línies de recerca: comportament electoral, economia política històrica, política del sud d'Europa.</p>
+      <div class="team-links"><a href="#" class="team-link">Perfil UPF</a><a href="#" class="team-link">Google Scholar</a></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">AI</div>
+      <div class="team-name">Assistent de Recerca</div>
+      <div class="team-role">Recollida i codificació de dades</div>
+      <p class="team-bio">Candidat/a a doctor/a a la Universitat Pompeu Fabra. Responsable de la recollida de fonts primàries, codificació de dades i control de qualitat.</p>
+      <div class="team-links"><a href="#" class="team-link">Perfil UPF</a></div>
+    </div>
+  </div>
+
+  <div class="section-label mt-lg">Finançament i agraïments</div>
+  <div class="info-grid">
+    <div class="info-item"><div class="info-item-label">Finançat per</div><div class="info-item-value">Ministerio de Ciencia e Innovación</div></div>
+    <div class="info-item"><div class="info-item-label">Referència del projecte</div><div class="info-item-value">PID2023-XXXXXX</div></div>
+    <div class="info-item"><div class="info-item-label">Institució amfitriona</div><div class="info-item-value">Universitat Pompeu Fabra</div></div>
+    <div class="info-item"><div class="info-item-label">Període</div><div class="info-item-value">2023–2026</div></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Atles Electoral de la Segona República Espanyola &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

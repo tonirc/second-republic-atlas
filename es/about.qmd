@@ -1,0 +1,75 @@
+---
+title: "Sobre el proyecto"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atlas Electoral · Segunda República Española · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/about.html" class="lang-btn">EN</a>
+    <a href="../../es/about.html" class="lang-btn active">ES</a>
+    <a href="../../ca/about.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">El equipo</div>
+  <h1 class="page-header-title">Sobre el Proyecto</h1>
+  <p class="page-header-sub">Quiénes somos y qué tratamos de entender</p>
+</div>
+
+<section class="content-section">
+  <div class="section-label">La investigación</div>
+  <h2 class="section-title">¿Por qué cartografiar las elecciones de la Segunda República?</h2>
+  <p class="section-body">La Segunda República Española (1931–1939) celebró tres elecciones parlamentarias bajo sufragio universal — incluyendo las primeras elecciones en España en las que las mujeres pudieron votar (1933). Estas elecciones tuvieron lugar en un contexto de alta polarización y sus resultados han sido objeto de intenso debate histórico y político desde entonces.</p>
+  <p class="section-body">Sin embargo, los datos completos y sistemáticos a nivel municipal para las tres elecciones nunca habían sido recopilados en un único conjunto de datos coherente y de acceso abierto. Este proyecto llena ese vacío.</p>
+
+  <div class="pull-quote">
+    <p>«La geografía de las elecciones de la República codifica la geografía de la Guerra Civil que siguió. Para entender una, hay que entender la otra.»</p>
+    <cite>Descripción del proyecto, 2024</cite>
+  </div>
+
+  <div class="section-label mt-lg">Historia del proyecto</div>
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-text">Proyecto concebido como parte de un programa de investigación más amplio sobre la economía política del período de entreguerras en Europa.</div></div>
+    <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-text">Primera fase de recopilación de datos de archivo: capitales de provincia y municipios grandes digitalizados a partir de la Gaceta de Madrid.</div></div>
+    <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-text">Financiación obtenida. Recopilación de datos ampliada a las 50 provincias.</div></div>
+    <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-text">Versión beta del atlas publicada. Libro de códigos y artículo metodológico enviados a revisión por pares.</div></div>
+    <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-text">Publicación pública del conjunto de datos completo y de este atlas interactivo.</div></div>
+  </div>
+
+  <div class="section-label mt-lg">El equipo</div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">SN</div>
+      <div class="team-name">Su Nombre</div>
+      <div class="team-role">Investigador/a Principal</div>
+      <p class="team-bio">Profesor/a asociado/a en el Departamento de Ciencias Políticas y Sociales de la Universitat Pompeu Fabra. Líneas de investigación: comportamiento electoral, economía política histórica, política del sur de Europa.</p>
+      <div class="team-links"><a href="#" class="team-link">Perfil UPF</a><a href="#" class="team-link">Google Scholar</a></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">AI</div>
+      <div class="team-name">Asistente de Investigación</div>
+      <div class="team-role">Recopilación y codificación de datos</div>
+      <p class="team-bio">Candidato/a a doctor/a en la Universitat Pompeu Fabra. Responsable de la recopilación de fuentes primarias, codificación de datos y control de calidad.</p>
+      <div class="team-links"><a href="#" class="team-link">Perfil UPF</a></div>
+    </div>
+  </div>
+
+  <div class="section-label mt-lg">Financiación y agradecimientos</div>
+  <div class="info-grid">
+    <div class="info-item"><div class="info-item-label">Financiado por</div><div class="info-item-value">Ministerio de Ciencia e Innovación</div></div>
+    <div class="info-item"><div class="info-item-label">Referencia del proyecto</div><div class="info-item-value">PID2023-XXXXXX</div></div>
+    <div class="info-item"><div class="info-item-label">Institución anfitriona</div><div class="info-item-value">Universitat Pompeu Fabra</div></div>
+    <div class="info-item"><div class="info-item-label">Período</div><div class="info-item-value">2023–2026</div></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Atlas Electoral de la Segunda República Española &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

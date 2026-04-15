@@ -1,0 +1,138 @@
+---
+title: "About"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/about.html" class="lang-btn active">EN</a>
+    <a href="../../es/about.html" class="lang-btn">ES</a>
+    <a href="../../ca/about.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">The team</div>
+  <h1 class="page-header-title">About the Project</h1>
+  <p class="page-header-sub">Who we are and what we are trying to understand</p>
+</div>
+
+<section class="content-section">
+
+  <!-- PROJECT DESCRIPTION -->
+  <div class="section-label">The research</div>
+  <h2 class="section-title">Why map the Second Republic's elections?</h2>
+  <p class="section-body">
+    The Spanish Second Republic (1931–1939) held three parliamentary elections under universal
+    suffrage — including the first election in Spain in which women could vote (1933). These
+    elections took place in a highly polarised context and their results have been the subject
+    of intense historical and political debate ever since.
+  </p>
+  <p class="section-body">
+    Yet comprehensive, systematic, <em>municipal-level</em> data for all three elections has
+    never been assembled in a single, consistent, openly accessible dataset. This project
+    fills that gap. By recovering and digitising results from provincial archives, the INE,
+    and regional records, we aim to provide a resource for historians, political scientists,
+    and the public alike.
+  </p>
+
+  <div class="pull-quote">
+    <p>"The geography of the Republic's elections encodes the geography of the Civil War
+    that followed. To understand one, you must understand the other."</p>
+    <cite>Project description, 2024</cite>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-label mt-lg">Project history</div>
+  <h3 class="section-title" style="font-size:1.3rem;">How we got here</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2021</div>
+      <div class="timeline-text">Project conceived as part of a broader research programme on the political economy of interwar Europe.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-text">First archival data collection phase: provincial capitals and large municipalities digitised from the Gaceta de Madrid.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-text">Funding secured. Data collection expanded to all 50 provinces. Research assistant hired.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-text">Beta version of the atlas launched. Codebook and methodology paper submitted for peer review.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-text">Public release of the full dataset and this interactive atlas.</div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="section-label mt-lg">The team</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Who we are</h3>
+  <div class="team-grid">
+
+    <div class="team-card">
+      <!-- Replace initials div with <img src="..." class="logo-img"> when you have a photo -->
+      <div class="team-avatar">YN</div>
+      <div class="team-name">Your Name</div>
+      <div class="team-role">Principal Investigator</div>
+      <p class="team-bio">
+        Associate Professor in the Department of Political and Social Sciences at
+        Universitat Pompeu Fabra. Research interests: electoral behaviour, historical
+        political economy, Southern European politics.
+      </p>
+      <div class="team-links">
+        <a href="#" class="team-link">UPF profile</a>
+        <a href="#" class="team-link">Google Scholar</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-avatar">RA</div>
+      <div class="team-name">Research Assistant</div>
+      <div class="team-role">Data Collection &amp; Coding</div>
+      <p class="team-bio">
+        PhD candidate at Universitat Pompeu Fabra. Responsible for primary source
+        collection, data coding, and quality control across all three election years.
+      </p>
+      <div class="team-links">
+        <a href="#" class="team-link">UPF profile</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FUNDING -->
+  <div class="section-label mt-lg">Funding &amp; acknowledgements</div>
+  <div class="info-grid">
+    <div class="info-item">
+      <div class="info-item-label">Funded by</div>
+      <div class="info-item-value">Ministerio de Ciencia e Innovación</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Grant reference</div>
+      <div class="info-item-value">PID2023-XXXXXX</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Host institution</div>
+      <div class="info-item-value">Universitat Pompeu Fabra</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Period</div>
+      <div class="info-item-value">2023–2026</div>
+    </div>
+  </div>
+
+</section>
+
+<footer class="site-footer">
+  <p>Electoral Atlas of the Spanish Second Republic &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

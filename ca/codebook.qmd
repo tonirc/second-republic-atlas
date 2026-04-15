@@ -1,0 +1,63 @@
+---
+title: "Llibre de codis"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/codebook.html" class="lang-btn">EN</a>
+    <a href="../../es/codebook.html" class="lang-btn">ES</a>
+    <a href="../../ca/codebook.html" class="lang-btn active">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Documentació</div>
+  <h1 class="page-header-title">Llibre de codis</h1>
+  <p class="page-header-sub">Definició de variables, fonts i notes metodològiques</p>
+</div>
+
+<section class="content-section">
+  <div class="section-label">Documentació del conjunt de dades</div>
+  <h2 class="section-title">Com llegir les dades</h2>
+  <p class="section-body">El llibre de codis descriu cada variable del conjunt de dades: com es va recollir, com es va codificar, quina és la unitat d'anàlisi i les limitacions conegudes. És el complement essencial de l'atles electoral i del conjunt de dades subjacent.</p>
+  <p class="section-body">El llibre de codis complet està disponible com a document PDF a continuació. S'actualitzarà a mesura que evolucioni el conjunt de dades.</p>
+
+  <div class="codebook-placeholder">
+    <div class="codebook-placeholder-icon">📄</div>
+    <div class="codebook-placeholder-text">El PDF del llibre de codis apareixerà aquí<br><span style="opacity:0.6;margin-top:0.4rem;display:block;">Col·loqueu el vostre fitxer a <code>pdfs/codebook.pdf</code></span></div>
+  </div>
+
+  <div style="text-align:center;margin-top:1.5rem;">
+    <a href="../../pdfs/codebook.pdf" class="contact-submit" download>↓ &nbsp; Descarregar llibre de codis (PDF)</a>
+  </div>
+
+  <div class="section-label mt-lg">Referència de variables</div>
+  <div style="overflow-x:auto;margin-top:1.5rem;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+      <thead><tr style="background:var(--ink);color:var(--parchment);">
+        <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Variable</th>
+        <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Descripció</th>
+        <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Rang</th>
+        <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Disponible</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--aged);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">cod_muni</td><td style="padding:0.65rem 0.85rem;">Identificador del municipi</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">Text</td><td style="padding:0.65rem 0.85rem;">Tots els anys</td></tr>
+        <tr style="border-bottom:1px solid var(--aged);background:rgba(245,240,232,0.4);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">left_[any]</td><td style="padding:0.65rem 0.85rem;">Percentatge de vot dels partits d'esquerra</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td><td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td></tr>
+        <tr style="border-bottom:1px solid var(--aged);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">right_[any]</td><td style="padding:0.65rem 0.85rem;">Percentatge de vot dels partits de dreta</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td><td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td></tr>
+        <tr style="border-bottom:1px solid var(--aged);background:rgba(245,240,232,0.4);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">other_[any]</td><td style="padding:0.65rem 0.85rem;">Percentatge de vot d'altres partits / regionals</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td><td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td></tr>
+        <tr style="border-bottom:1px solid var(--aged);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">turnout_[any]</td><td style="padding:0.65rem 0.85rem;">Participació electoral (vots / cens)</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td><td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Atles Electoral de la Segona República Espanyola &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

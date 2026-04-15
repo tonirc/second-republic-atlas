@@ -1,0 +1,69 @@
+---
+title: "El Llibre"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/book.html" class="lang-btn">EN</a>
+    <a href="../../es/book.html" class="lang-btn">ES</a>
+    <a href="../../ca/book.html" class="lang-btn active">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Publicació</div>
+  <h1 class="page-header-title">El Projecte <em>Llibre</em></h1>
+  <p class="page-header-sub">Una monografia sobre la geografia electoral de la Segona República</p>
+</div>
+
+<section class="content-section">
+  <div class="book-feature">
+    <div class="book-cover">
+      <div class="book-cover-flag"></div>
+      <div class="book-cover-sub">Geografia Electoral</div>
+      <div class="book-cover-title">Vots, Territori i la Caiguda de la República</div>
+      <div class="book-cover-sub" style="margin-top:auto;">El vostre nom · 2025</div>
+    </div>
+    <div>
+      <div class="section-label">Sobre el llibre</div>
+      <h2 class="section-title" style="font-size:1.5rem;">Vots, Territori i la Caiguda de la República Espanyola</h2>
+      <div class="book-meta-row">
+        <div class="book-meta-item"><div class="book-meta-label">Autor/a</div><div class="book-meta-value">El vostre nom</div></div>
+        <div class="book-meta-item"><div class="book-meta-label">Editorial</div><div class="book-meta-value">Per determinar</div></div>
+        <div class="book-meta-item"><div class="book-meta-label">Previst</div><div class="book-meta-value">2026</div></div>
+        <div class="book-meta-item"><div class="book-meta-label">Idioma</div><div class="book-meta-value">Anglès</div></div>
+      </div>
+      <p class="section-body" style="font-size:0.95rem;">Aquest llibre examina la lògica territorial de la competició política durant la Segona República Espanyola. A partir d'un nou conjunt de dades municipals de resultats electorals (1931–1936), reconstrueix com la geografia, la classe social, la religió i les organitzacions polítiques locals van configurar els patrons de vot — i com aquests patrons es van traduir en polarització, trencament democràtic i guerra civil.</p>
+      <a href="#" class="book-cta">✉ &nbsp; Notificar-me en publicar</a>
+      <a href="../../ca/contribute.html" class="book-cta book-cta-outline">Contribuir dades</a>
+    </div>
+  </div>
+
+  <div class="section-label mt-lg">Continguts</div>
+  <div class="book-chapters">
+    <div class="chapter-item"><div class="chapter-num">Intro</div><div><div class="chapter-title">Introducció: La Geografia de la Democràcia</div><div class="chapter-desc">Per què la geografia electoral és clau per entendre la trajectòria de la República.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">01</div><div><div class="chapter-title">Dades i Mètodes</div><div class="chapter-desc">Fonts, decisions de codificació, cobertura i limitacions del conjunt de dades municipal.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">02</div><div><div class="chapter-title">Abril de 1931: Les Eleccions Fundacionals</div><div class="chapter-desc">Com la coalició republicana va escombrar Espanya i on ja era feble.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">03</div><div><div class="chapter-title">Novembre de 1933: La Inversió</div><div class="chapter-desc">Sufragi femení, esquerra fragmentada i l'ascens de la CEDA al camp.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">04</div><div><div class="chapter-title">Febrer de 1936: El Front Popular</div><div class="chapter-desc">Una ajustada majoria en vots populars, la seva distribució geogràfica i el seu aftermath disputat.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">05</div><div><div class="chapter-title">Geografia Electoral i la Guerra Civil</div><div class="chapter-desc">El mapa electoral de 1936 prediu la geografia del conflicte de 1936–1939?</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">Concl.</div><div><div class="chapter-title">Conclusió: Democràcia, Territori i Polarització</div><div class="chapter-desc">Implicacions comparades per a l'Europa d'entreguerres i les democràcies contemporànies.</div></div></div>
+  </div>
+
+  <div class="section-label mt-lg">Publicacions relacionades</div>
+  <div class="info-grid" style="grid-template-columns:1fr;">
+    <div class="info-item"><div class="info-item-label">Document de treball</div><div class="info-item-value" style="font-size:0.9rem;">"Resultats Electorals Municipals a la Segona República Espanyola: Un Nou Conjunt de Dades." 2024. <a href="#">Descarregar</a></div></div>
+    <div class="info-item"><div class="info-item-label">Ponència</div><div class="info-item-value" style="font-size:0.9rem;">Presentat a APSA 2024, ECPR 2024. Diapositives disponibles sota petició.</div></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Atles Electoral de la Segona República Espanyola &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

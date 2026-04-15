@@ -1,0 +1,63 @@
+---
+title: "El Libro"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atlas Electoral · Segunda República Española · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/book.html" class="lang-btn">EN</a>
+    <a href="../../es/book.html" class="lang-btn active">ES</a>
+    <a href="../../ca/book.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Publicación</div>
+  <h1 class="page-header-title">El Proyecto <em>Libro</em></h1>
+  <p class="page-header-sub">Una monografía sobre la geografía electoral de la Segunda República</p>
+</div>
+
+<section class="content-section">
+  <div class="book-feature">
+    <div class="book-cover">
+      <div class="book-cover-flag"></div>
+      <div class="book-cover-sub">Geografía Electoral</div>
+      <div class="book-cover-title">Votos, Territorio y la Caída de la República</div>
+      <div class="book-cover-sub" style="margin-top:auto;">Su Nombre · 2025</div>
+    </div>
+    <div>
+      <div class="section-label">Sobre el libro</div>
+      <h2 class="section-title" style="font-size:1.5rem;">Votos, Territorio y la Caída de la República Española</h2>
+      <div class="book-meta-row">
+        <div class="book-meta-item"><div class="book-meta-label">Autor/a</div><div class="book-meta-value">Su Nombre</div></div>
+        <div class="book-meta-item"><div class="book-meta-label">Editorial</div><div class="book-meta-value">Por determinar</div></div>
+        <div class="book-meta-item"><div class="book-meta-label">Previsto</div><div class="book-meta-value">2026</div></div>
+        <div class="book-meta-item"><div class="book-meta-label">Idioma</div><div class="book-meta-value">Inglés</div></div>
+      </div>
+      <p class="section-body" style="font-size:0.95rem;">Este libro examina la lógica territorial de la competición política durante la Segunda República Española. A partir de un nuevo conjunto de datos municipales de resultados electorales (1931–1936), reconstruye cómo la geografía, la clase social, la religión y las organizaciones políticas locales configuraron los patrones de voto — y cómo esos patrones se tradujeron en polarización, quiebra democrática y guerra civil.</p>
+      <a href="#" class="book-cta">✉ &nbsp; Notificarme al publicar</a>
+      <a href="../../es/contribute.html" class="book-cta book-cta-outline">Contribuir datos</a>
+    </div>
+  </div>
+
+  <div class="section-label mt-lg">Contenidos</div>
+  <div class="book-chapters">
+    <div class="chapter-item"><div class="chapter-num">Intro</div><div><div class="chapter-title">Introducción: La Geografía de la Democracia</div><div class="chapter-desc">Por qué la geografía electoral es clave para entender la trayectoria de la República.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">01</div><div><div class="chapter-title">Datos y Métodos</div><div class="chapter-desc">Fuentes, decisiones de codificación, cobertura y limitaciones del conjunto de datos municipal.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">02</div><div><div class="chapter-title">Abril de 1931: Las Elecciones Fundacionales</div><div class="chapter-desc">Cómo la coalición republicana barrió España y dónde ya era débil.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">03</div><div><div class="chapter-title">Noviembre de 1933: La Inversión</div><div class="chapter-desc">Sufragio femenino, izquierda fragmentada y el ascenso de la CEDA en el campo.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">04</div><div><div class="chapter-title">Febrero de 1936: El Frente Popular</div><div class="chapter-desc">Una ajustada mayoría en votos populares, su distribución geográfica y su disputado aftermath.</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">05</div><div><div class="chapter-title">Geografía Electoral y la Guerra Civil</div><div class="chapter-desc">¿Predice el mapa electoral de 1936 la geografía del conflicto de 1936–1939?</div></div></div>
+    <div class="chapter-item"><div class="chapter-num">Concl.</div><div><div class="chapter-title">Conclusión: Democracia, Territorio y Polarización</div><div class="chapter-desc">Implicaciones comparadas para la Europa de entreguerras y las democracias contemporáneas.</div></div></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Atlas Electoral de la Segunda República Española &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

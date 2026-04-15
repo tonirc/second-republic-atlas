@@ -1,0 +1,63 @@
+---
+title: "Libro de códigos"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atlas Electoral · Segunda República Española · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/codebook.html" class="lang-btn">EN</a>
+    <a href="../../es/codebook.html" class="lang-btn active">ES</a>
+    <a href="../../ca/codebook.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Documentación</div>
+  <h1 class="page-header-title">Libro de códigos</h1>
+  <p class="page-header-sub">Definición de variables, fuentes y notas metodológicas</p>
+</div>
+
+<section class="content-section">
+  <div class="section-label">Documentación del conjunto de datos</div>
+  <h2 class="section-title">Cómo leer los datos</h2>
+  <p class="section-body">El libro de códigos describe cada variable del conjunto de datos: cómo se recopiló, cómo se codificó, cuál es la unidad de análisis y las limitaciones conocidas. Es el complemento esencial del atlas electoral y del conjunto de datos subyacente.</p>
+  <p class="section-body">El libro de códigos completo está disponible como documento PDF a continuación. Se actualizará a medida que evolucione el conjunto de datos.</p>
+
+  <div class="codebook-placeholder">
+    <div class="codebook-placeholder-icon">📄</div>
+    <div class="codebook-placeholder-text">El PDF del libro de códigos aparecerá aquí<br><span style="opacity:0.6;margin-top:0.4rem;display:block;">Coloque su archivo en <code>pdfs/codebook.pdf</code></span></div>
+  </div>
+
+  <div style="text-align:center;margin-top:1.5rem;">
+    <a href="../../pdfs/codebook.pdf" class="contact-submit" download>↓ &nbsp; Descargar libro de códigos (PDF)</a>
+  </div>
+
+  <div class="section-label mt-lg">Referencia de variables</div>
+  <div style="overflow-x:auto;margin-top:1.5rem;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+      <thead><tr style="background:var(--ink);color:var(--parchment);">
+        <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Variable</th>
+        <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Descripción</th>
+        <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Rango</th>
+        <th style="padding:0.65rem 0.85rem;text-align:left;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;">Disponible</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--aged);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">cod_muni</td><td style="padding:0.65rem 0.85rem;">Identificador del municipio</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">Texto</td><td style="padding:0.65rem 0.85rem;">Todos los años</td></tr>
+        <tr style="border-bottom:1px solid var(--aged);background:rgba(245,240,232,0.4);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">left_[año]</td><td style="padding:0.65rem 0.85rem;">Porcentaje de voto de partidos de izquierda</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td><td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td></tr>
+        <tr style="border-bottom:1px solid var(--aged);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">right_[año]</td><td style="padding:0.65rem 0.85rem;">Porcentaje de voto de partidos de derecha</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td><td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td></tr>
+        <tr style="border-bottom:1px solid var(--aged);background:rgba(245,240,232,0.4);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">other_[año]</td><td style="padding:0.65rem 0.85rem;">Porcentaje de voto de otros partidos / regionales</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td><td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td></tr>
+        <tr style="border-bottom:1px solid var(--aged);"><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--republic);">turnout_[año]</td><td style="padding:0.65rem 0.85rem;">Participación electoral (votos / censo)</td><td style="padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:0.75rem;">0 – 1</td><td style="padding:0.65rem 0.85rem;">1931, 1933, 1936</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Atlas Electoral de la Segunda República Española &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

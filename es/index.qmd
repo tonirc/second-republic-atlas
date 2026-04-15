@@ -1,0 +1,79 @@
+---
+title: "Inicio"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atlas Electoral · Segunda República Española · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../../en/" class="lang-btn">EN</a>
+    <a href="../../es/" class="lang-btn active">ES</a>
+    <a href="../../ca/" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-flag-stripe"></div>
+  <div class="hero-year">Segunda República Española · 1931–1939</div>
+  <h1 class="hero-title">Atlas Electoral de la<br><em>Segunda República</em></h1>
+  <p class="hero-subtitle">Resultados electorales municipales, 1931 · 1933 · 1936</p>
+  <div class="hero-divider"></div>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="hero-meta-label">Elecciones</span><span class="hero-meta-value">3</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-label">Municipios</span><span class="hero-meta-value">~9.000</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-label">Período</span><span class="hero-meta-value">1931–36</span></div>
+  </div>
+</section>
+
+<div class="logo-bar">
+  <div class="logo-bar-item">
+    <div class="logo-placeholder">Logo UPF</div>
+    <span class="logo-caption">Universitat Pompeu Fabra</span>
+  </div>
+  <div class="logo-bar-divider"></div>
+  <div class="logo-bar-item">
+    <div class="logo-placeholder">Logo Ministerio</div>
+    <span class="logo-caption">Ministerio de Ciencia e Innovación</span>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="section-label">Sobre el proyecto</div>
+  <h2 class="section-title">La geografía electoral de la<br>democracia republicana</h2>
+  <p class="section-body">Este atlas presenta los resultados de las tres elecciones generales celebradas durante la Segunda República Española (1931–1939) a nivel municipal. Al cartografiar la geografía electoral de toda España, se revelan los patrones territoriales del apoyo político y las profundas divisiones que marcaron el destino de la República.</p>
+  <p class="section-body">Los datos cubren más de 9.000 municipios en las tres elecciones de abril de 1931, noviembre de 1933 y febrero de 1936, permitiendo comparar los cambios políticos entre regiones, coaliciones y períodos.</p>
+
+  <div class="election-cards">
+    <div class="election-card">
+      <div class="card-year">1931</div>
+      <div class="card-name">Coalición Republicano-Socialista</div>
+      <p class="card-desc">Las elecciones fundacionales. Una victoria aplastante de las fuerzas republicanas y socialistas puso fin a la monarquía y estableció la Segunda República.</p>
+    </div>
+    <div class="election-card">
+      <div class="card-year">1933</div>
+      <div class="card-name">Victoria de las derechas</div>
+      <p class="card-desc">Las primeras elecciones con sufragio femenino. Una izquierda dividida permitió que la CEDA y los radicales formaran un gobierno de centroderecha.</p>
+    </div>
+    <div class="election-card">
+      <div class="card-year">1936</div>
+      <div class="card-name">Frente Popular</div>
+      <p class="card-desc">La izquierda unida en el Frente Popular derrotó ajustadamente al Bloque Nacional. El resultado fue disputado y precedió a la Guerra Civil.</p>
+    </div>
+  </div>
+
+  <div class="section-label mt-lg">Detalles del proyecto</div>
+  <div class="info-grid">
+    <div class="info-item"><div class="info-item-label">Fuentes de datos</div><div class="info-item-value">Registros electorales históricos, INE, archivos regionales</div></div>
+    <div class="info-item"><div class="info-item-label">Geografía</div><div class="info-item-value">Límites municipales históricos, años 1930</div></div>
+    <div class="info-item"><div class="info-item-label">Herramienta cartográfica</div><div class="info-item-value">Maplibre GL JS</div></div>
+    <div class="info-item"><div class="info-item-label">Construido con</div><div class="info-item-value">R · Quarto · GitHub Pages</div></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Atlas Electoral de la Segunda República Española &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```
