@@ -81,9 +81,9 @@ n_matched <- sum(!is.na(muni_joined$left_1936))
 cat("Municipalities with 1936 data:", n_matched, "/", nrow(muni_joined), "\n")
 
 # ── 4. Simplify ───────────────────────────────────────────
-# keep = 0.05 retains 5% of vertices — sufficient at national zoom.
-# Increase to 0.10 if municipal shapes become too distorted.
-muni_simple <- ms_simplify(muni_joined, keep = 0.05, keep_shapes = TRUE)
+# keep = 0.35 retains materially more boundary detail while keeping
+# the municipality GeoJSON small enough for responsive browser rendering.
+muni_simple <- ms_simplify(muni_joined, keep = 0.35, keep_shapes = TRUE)
 
 # ── 5. Write GeoJSON ──────────────────────────────────────
 dir.create("data", showWarnings = FALSE)
