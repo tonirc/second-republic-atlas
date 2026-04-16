@@ -9,9 +9,9 @@ format:
 <div class="masthead">
   <span>Atlas Electoral · Segunda República Española · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../../en/codebook.html" class="lang-btn">EN</a>
-    <a href="../../es/codebook.html" class="lang-btn active">ES</a>
-    <a href="../../ca/codebook.html" class="lang-btn">CA</a>
+    <a href="../en/codebook.html" class="lang-btn">EN</a>
+    <a href="../es/codebook.html" class="lang-btn active">ES</a>
+    <a href="../ca/codebook.html" class="lang-btn">CA</a>
   </div>
 </div>
 
@@ -34,7 +34,7 @@ format:
   </div>
 
   <div style="text-align:center;margin-top:1.5rem;">
-    <a href="../../pdfs/codebook.pdf" class="contact-submit" download>↓ &nbsp; Descargar libro de códigos (PDF)</a>
+    <a href="../pdfs/codebook.pdf" class="contact-submit" download>↓ &nbsp; Descargar libro de códigos (PDF)</a>
   </div>
 
   <div class="section-label mt-lg">Referencia de variables</div>

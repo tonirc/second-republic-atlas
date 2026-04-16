@@ -9,9 +9,9 @@ format:
 <div class="masthead">
   <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../../en/" class="lang-btn">EN</a>
-    <a href="../../es/" class="lang-btn">ES</a>
-    <a href="../../ca/" class="lang-btn active">CA</a>
+    <a href="../en/" class="lang-btn">EN</a>
+    <a href="../es/" class="lang-btn">ES</a>
+    <a href="../ca/" class="lang-btn active">CA</a>
   </div>
 </div>
 
@@ -30,13 +30,13 @@ format:
 
 <div class="logo-bar">
   <div class="logo-bar-item">
-    <div class="logo-placeholder">Logo UPF</div>
+    <img src="../en/images/upf-logo.png" class="logo-img" alt="UPF">
     <span class="logo-caption">Universitat Pompeu Fabra</span>
   </div>
   <div class="logo-bar-divider"></div>
   <div class="logo-bar-item">
-    <div class="logo-placeholder">Logo Ministeri</div>
-    <span class="logo-caption">Ministerio de Ciencia e Innovación</span>
+    <img src="../en/images/ministerio-logo.png" class="logo-img" alt="Ministerio de Ciencia">
+    <span class="logo-caption">Ministerio de Ciència e Innovació</span>
   </div>
 </div>
 

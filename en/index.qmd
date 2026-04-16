@@ -9,9 +9,9 @@ format:
 <div class="masthead">
   <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../../en/" class="lang-btn active">EN</a>
-    <a href="../../es/" class="lang-btn">ES</a>
-    <a href="../../ca/" class="lang-btn">CA</a>
+    <a href="../en/" class="lang-btn active">EN</a>
+    <a href="../es/" class="lang-btn">ES</a>
+    <a href="../ca/" class="lang-btn">CA</a>
   </div>
 </div>
 

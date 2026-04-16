@@ -9,9 +9,9 @@ format:
 <div class="masthead">
   <span>Atlas Electoral · Segunda República Española · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../../en/book.html" class="lang-btn">EN</a>
-    <a href="../../es/book.html" class="lang-btn active">ES</a>
-    <a href="../../ca/book.html" class="lang-btn">CA</a>
+    <a href="../en/book.html" class="lang-btn">EN</a>
+    <a href="../es/book.html" class="lang-btn active">ES</a>
+    <a href="../ca/book.html" class="lang-btn">CA</a>
   </div>
 </div>
 
@@ -41,7 +41,7 @@ format:
       </div>
       <p class="section-body" style="font-size:0.95rem;">Este libro examina la lógica territorial de la competición política durante la Segunda República Española. A partir de un nuevo conjunto de datos municipales de resultados electorales (1931–1936), reconstruye cómo la geografía, la clase social, la religión y las organizaciones políticas locales configuraron los patrones de voto — y cómo esos patrones se tradujeron en polarización, quiebra democrática y guerra civil.</p>
       <a href="#" class="book-cta">✉ &nbsp; Notificarme al publicar</a>
-      <a href="../../es/contribute.html" class="book-cta book-cta-outline">Contribuir datos</a>
+      <a href="../es/contribute.html" class="book-cta book-cta-outline">Contribuir datos</a>
     </div>
   </div>
 

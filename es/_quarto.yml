@@ -3,6 +3,7 @@ project:
   output-dir: ../docs/es
   resources:
     - "../data/*"
+    - "../en/images/*"
 
 website:
   title: "Atlas Electoral · Segunda República"
@@ -31,7 +32,7 @@ website:
 
 format:
   html:
-    theme: none
+    theme: minimal
     css: "styles.css"
     toc: false
     page-layout: full

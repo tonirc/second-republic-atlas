@@ -9,9 +9,9 @@ format:
 <div class="masthead">
   <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../../en/book.html" class="lang-btn active">EN</a>
-    <a href="../../es/book.html" class="lang-btn">ES</a>
-    <a href="../../ca/book.html" class="lang-btn">CA</a>
+    <a href="../en/book.html" class="lang-btn active">EN</a>
+    <a href="../es/book.html" class="lang-btn">ES</a>
+    <a href="../ca/book.html" class="lang-btn">CA</a>
   </div>
 </div>
 
@@ -72,7 +72,7 @@ format:
       </p>
 
       <a href="#" class="book-cta">✉ &nbsp; Notify me on publication</a>
-      <a href="../../en/contribute.html" class="book-cta book-cta-outline">Contribute data</a>
+      <a href="../en/contribute.html" class="book-cta book-cta-outline">Contribute data</a>
     </div>
   </div>
 

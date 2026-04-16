@@ -9,9 +9,9 @@ format:
 <div class="masthead">
   <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../../en/codebook.html" class="lang-btn">EN</a>
-    <a href="../../es/codebook.html" class="lang-btn">ES</a>
-    <a href="../../ca/codebook.html" class="lang-btn active">CA</a>
+    <a href="../en/codebook.html" class="lang-btn">EN</a>
+    <a href="../es/codebook.html" class="lang-btn">ES</a>
+    <a href="../ca/codebook.html" class="lang-btn active">CA</a>
   </div>
 </div>
 
@@ -34,7 +34,7 @@ format:
   </div>
 
   <div style="text-align:center;margin-top:1.5rem;">
-    <a href="../../pdfs/codebook.pdf" class="contact-submit" download>↓ &nbsp; Descarregar llibre de codis (PDF)</a>
+    <a href="../pdfs/codebook.pdf" class="contact-submit" download>↓ &nbsp; Descarregar llibre de codis (PDF)</a>
   </div>
 
   <div class="section-label mt-lg">Referència de variables</div>

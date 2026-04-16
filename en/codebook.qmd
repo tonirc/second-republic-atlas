@@ -9,9 +9,9 @@ format:
 <div class="masthead">
   <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../../en/codebook.html" class="lang-btn active">EN</a>
-    <a href="../../es/codebook.html" class="lang-btn">ES</a>
-    <a href="../../ca/codebook.html" class="lang-btn">CA</a>
+    <a href="../en/codebook.html" class="lang-btn active">EN</a>
+    <a href="../es/codebook.html" class="lang-btn">ES</a>
+    <a href="../ca/codebook.html" class="lang-btn">CA</a>
   </div>
 </div>
 
@@ -38,7 +38,7 @@ format:
 
   <!-- PDF VIEWER -->
   <!-- Once you have your PDF, replace the placeholder below with:
-       <iframe src="../../pdfs/codebook.pdf" class="codebook-embed"></iframe>
+       <iframe src="../pdfs/codebook.pdf" class="codebook-embed"></iframe>
   -->
   <div class="codebook-placeholder">
     <div class="codebook-placeholder-icon">📄</div>
@@ -52,7 +52,7 @@ format:
 
   <!-- DOWNLOAD LINK -->
   <div style="text-align:center;margin-top:1.5rem;">
-    <a href="../../pdfs/codebook.pdf" class="contact-submit" download>
+    <a href="../pdfs/codebook.pdf" class="contact-submit" download>
       ↓ &nbsp; Download Codebook (PDF)
     </a>
   </div>

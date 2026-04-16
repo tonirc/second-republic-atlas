@@ -9,9 +9,9 @@ format:
 <div class="masthead">
   <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../../en/book.html" class="lang-btn">EN</a>
-    <a href="../../es/book.html" class="lang-btn">ES</a>
-    <a href="../../ca/book.html" class="lang-btn active">CA</a>
+    <a href="../en/book.html" class="lang-btn">EN</a>
+    <a href="../es/book.html" class="lang-btn">ES</a>
+    <a href="../ca/book.html" class="lang-btn active">CA</a>
   </div>
 </div>
 
@@ -41,7 +41,7 @@ format:
       </div>
       <p class="section-body" style="font-size:0.95rem;">Aquest llibre examina la lògica territorial de la competició política durant la Segona República Espanyola. A partir d'un nou conjunt de dades municipals de resultats electorals (1931–1936), reconstrueix com la geografia, la classe social, la religió i les organitzacions polítiques locals van configurar els patrons de vot — i com aquests patrons es van traduir en polarització, trencament democràtic i guerra civil.</p>
       <a href="#" class="book-cta">✉ &nbsp; Notificar-me en publicar</a>
-      <a href="../../ca/contribute.html" class="book-cta book-cta-outline">Contribuir dades</a>
+      <a href="../ca/contribute.html" class="book-cta book-cta-outline">Contribuir dades</a>
     </div>
   </div>
 

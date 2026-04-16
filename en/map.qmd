@@ -10,15 +10,6 @@ format:
 ---
 
 ```{=html}
-<div class="masthead">
-  <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
-  <div class="lang-switcher">
-    <a href="../en/map.html" class="lang-btn active">EN</a>
-    <a href="../es/map.html" class="lang-btn">ES</a>
-    <a href="../ca/map.html" class="lang-btn">CA</a>
-  </div>
-</div>
-
 <!-- TOOLBAR -->
 <div class="map-toolbar">
   <span class="toolbar-label">Year:</span>
@@ -34,7 +25,7 @@ format:
   <button class="var-btn" onclick="setVar('other', this)">Other</button>
   <button class="var-btn" onclick="setVar('blank_null', this)">Blank/Null</button>
   <button class="var-btn" onclick="setVar('turnout', this)">Turnout</button>
-  <span class="toolbar-label" style="margin-left:auto;opacity:0.5;font-size:0.6rem;">Hover over a municipality for details</span>
+  <span class="toolbar-label" style="margin-left:auto;opacity:0.4;font-size:0.6rem;white-space:nowrap;">Hover for details</span>
 </div>
 
 <!-- MAP -->
@@ -68,8 +59,8 @@ const VAR_CONFIG = {
   right:     {
     label: 'Right coalition',
     prop: (y) => `right_${y}`,
-    gradient: 'linear-gradient(to right,#1a9850,#91cf60,#ffffbf,#fc8d59,#d73027)',
-    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#1a9850', 0.3,'#91cf60', 0.5,'#ffffbf', 0.7,'#fc8d59', 1,'#d73027']
+    gradient: 'linear-gradient(to right,#deebf7,#9ecae1,#4292c6,#2171b5,#08519c)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#deebf7', 0.25,'#9ecae1', 0.5,'#4292c6', 0.75,'#2171b5', 1,'#08519c']
   },
   basque:    {
     label: 'Basque nat. coalition',

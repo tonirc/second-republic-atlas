@@ -9,9 +9,9 @@ format:
 <div class="masthead">
   <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../../en/about.html" class="lang-btn">EN</a>
-    <a href="../../es/about.html" class="lang-btn">ES</a>
-    <a href="../../ca/about.html" class="lang-btn active">CA</a>
+    <a href="../en/about.html" class="lang-btn">EN</a>
+    <a href="../es/about.html" class="lang-btn">ES</a>
+    <a href="../ca/about.html" class="lang-btn active">CA</a>
   </div>
 </div>
 
