@@ -26,6 +26,11 @@ format:
   <button class="var-btn" onclick="setVar('other', this)">Otros</button>
   <button class="var-btn" onclick="setVar('blank_null', this)">Blancos/Nulos</button>
   <button class="var-btn" onclick="setVar('turnout', this)">Participación</button>
+  <div class="toolbar-sep"></div>
+  <div class="search-wrap">
+    <input class="search-input" id="muni-search" type="text" placeholder="Buscar municipio…" autocomplete="off" spellcheck="false">
+    <ul class="search-suggestions" id="search-suggestions" hidden></ul>
+  </div>
   <span class="toolbar-label" style="margin-left:auto;opacity:0.4;font-size:0.6rem;white-space:nowrap;">Cursor sobre municipio para detalles</span>
 </div>
 
@@ -93,6 +98,55 @@ const VAR_CONFIG = {
 let currentYear = 1936;
 let currentVar  = 'left';
 let showDistricts = true;
+let muniIndex = [];
+
+function flatCoords(geom) {
+  if (geom.type === 'Polygon') return geom.coordinates[0];
+  if (geom.type === 'MultiPolygon') return geom.coordinates.flat(2);
+  return [];
+}
+
+function buildSearchIndex(geojson) {
+  muniIndex = geojson.features
+    .filter(f => f.properties && f.properties.nombre)
+    .map(f => {
+      const pts = flatCoords(f.geometry);
+      let x0=Infinity, x1=-Infinity, y0=Infinity, y1=-Infinity;
+      for (const pt of pts) {
+        if (pt[0]<x0) x0=pt[0]; if (pt[0]>x1) x1=pt[0];
+        if (pt[1]<y0) y0=pt[1]; if (pt[1]>y1) y1=pt[1];
+      }
+      return {nombre: f.properties.nombre, provincia: f.properties.provincia||'', bbox:[[x0,y0],[x1,y1]]};
+    });
+}
+
+function initSearch() {
+  const input = document.getElementById('muni-search');
+  const list  = document.getElementById('search-suggestions');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    list.innerHTML = '';
+    if (q.length < 2) { list.hidden = true; return; }
+    const hits = muniIndex.filter(m => m.nombre.toLowerCase().includes(q)).slice(0, 8);
+    if (!hits.length) { list.hidden = true; return; }
+    hits.forEach(m => {
+      const li = document.createElement('li');
+      li.className = 'search-suggestion-item';
+      li.innerHTML = `<span class="sug-name">${m.nombre}</span><span class="sug-prov">${m.provincia}</span>`;
+      li.addEventListener('mousedown', e => {
+        e.preventDefault();
+        map.fitBounds(m.bbox, {padding: 50, maxZoom: 12, duration: 800});
+        input.value = m.nombre;
+        list.hidden = true;
+      });
+      list.appendChild(li);
+    });
+    list.hidden = false;
+  });
+  input.addEventListener('blur', () => { setTimeout(() => { list.hidden = true; }, 150); });
+  input.addEventListener('keydown', e => { if (e.key === 'Escape') { list.hidden = true; input.blur(); } });
+}
 
 const DEFAULT_VIEW = {center: [-3.7, 40.2], zoom: 5.5, bearing: 0, pitch: 0};
 
@@ -181,6 +235,7 @@ function addMapUtilityControls() {
 }
 
 addMapUtilityControls();
+initSearch();
 
 function colorExpression() {
   const cfg  = VAR_CONFIG[currentVar];
@@ -207,6 +262,8 @@ map.on('load', () => {
     paint: {'fill-color': '#000', 'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.12,0]}});
 
   updateDistrictLayers();
+
+  fetch('../municipios.geojson').then(r => r.json()).then(buildSearchIndex);
 
   let hoveredId = null;
   map.on('mousemove', 'municipios-fill', (e) => {
