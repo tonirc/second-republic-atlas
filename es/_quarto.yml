@@ -22,13 +22,6 @@ website:
         text: "Sobre el proyecto"
       - href: book.qmd
         text: "El Libro"
-    right:
-      - text: "EN"
-        href: "../en/"
-      - text: "ES"
-        href: "../es/"
-      - text: "CA"
-        href: "../ca/"
 
 format:
   html:
