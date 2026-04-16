@@ -89,8 +89,16 @@ Search all `contribute.qmd` files for `yourname@upf.edu` and replace with your r
 ### 5. Render locally
 
 ```bash
-quarto render en/
+./render-all.sh
 # Open docs/en/index.html in browser to check
+```
+
+If you render a single language manually, use:
+
+```bash
+quarto render en --output-dir docs/en
+rsync -a --delete en/docs/en/ docs/en/
+rm -rf en/docs
 ```
 
 ### 6. Deploy
