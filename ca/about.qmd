@@ -34,27 +34,65 @@ format:
   </div>
 
   <div class="section-label mt-lg">L'equip</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Qui som</h3>
   <div class="team-grid">
+
     <div class="team-card">
-      <div class="team-avatar">VN</div>
-      <div class="team-name">El vostre nom</div>
-      <div class="team-role">Investigador/a Principal</div>
-      <p class="team-bio">Professor/a associat/da al Departament de Ciències Polítiques i Socials de la Universitat Pompeu Fabra. Línies de recerca: comportament electoral, economia política històrica, política del sud d'Europa.</p>
-      <div class="team-links"><a href="#" class="team-link">Perfil UPF</a><a href="#" class="team-link">Google Scholar</a></div>
+      <div class="team-avatar"><img src="images/tonirodon.jpg" alt="Toni Rodon"></div>
+      <div class="team-name">Toni Rodon</div>
+      <div class="team-role">IP · VEARLYDEM — Voting in Early Democracies: The Case of the Spanish Second Republic</div>
+      <p class="team-bio">
+        Professor associat de Ciència Política a la Universitat Pompeu Fabra (Barcelona),
+        investigador ICREA Academia i delegat de transferència de coneixement en Ciències
+        Socials i Humanitats a la UPF. La seva recerca se centra en comportament polític,
+        política comparada i economia política històrica.
+      </p>
+      <div class="team-links">
+        <a href="https://www.tonirodon.cat" class="team-link" target="_blank" rel="noopener">🌐 Web</a>
+        <a href="https://www.linkedin.com/in/toni-rodon-6a7299375/" class="team-link" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a href="https://bsky.app/profile/tonirodon.bsky.social" class="team-link" target="_blank" rel="noopener">🦋 Bluesky</a>
+      </div>
     </div>
+
     <div class="team-card">
-      <div class="team-avatar">AI</div>
-      <div class="team-name">Assistent de Recerca</div>
-      <div class="team-role">Recollida i codificació de dades</div>
-      <p class="team-bio">Candidat/a a doctor/a a la Universitat Pompeu Fabra. Responsable de la recollida de fonts primàries, codificació de dades i control de qualitat.</p>
-      <div class="team-links"><a href="#" class="team-link">Perfil UPF</a></div>
+      <div class="team-avatar"><img src="images/pauvall.jpg" alt="Pau-Vall Prat"></div>
+      <div class="team-name">Pau-Vall Prat</div>
+      <div class="team-role">Investigador</div>
+      <p class="team-bio">
+        Professor lector a la Universitat de Barcelona i Teaching Fellow a la Universitat
+        Oberta de Catalunya. La seva recerca estudia la democratització, la competència
+        entre elits i l'economia política històrica a Europa.
+      </p>
+      <div class="team-links">
+        <a href="https://sites.google.com/site/pauvallprat/" class="team-link" target="_blank" rel="noopener">🌐 Web</a>
+        <a href="https://www.linkedin.com/in/pau-vall-i-prat-82550848/" class="team-link" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a href="https://bsky.app/profile/pauvallprat.bsky.social" class="team-link" target="_blank" rel="noopener">🦋 Bluesky</a>
+      </div>
     </div>
+
+    <div class="team-card">
+      <div class="team-avatar"><img src="images/diegomartin.jpg" alt="Diego Martin-Alvarez"></div>
+      <div class="team-name">Diego Martin-Alvarez</div>
+      <div class="team-role">Assistent de recerca</div>
+      <p class="team-bio">
+        Politòleg i graduat del màster de l'Institut Carlos III-Juan March.
+        Des d'octubre de 2025 treballa com a assistent de recerca a VEARLYDEM
+        a la Universitat Pompeu Fabra. Els seus interessos inclouen economia política
+        històrica, reformes educatives i geografia política.
+      </p>
+      <div class="team-links">
+        <a href="https://dmartinalv.github.io/" class="team-link" target="_blank" rel="noopener">🌐 Web</a>
+        <a href="https://es.linkedin.com/in/diego-mart%C3%ADn-%C3%A1lvarez-293a27254" class="team-link" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a href="https://bsky.app/profile/diegomartin-916.bsky.social" class="team-link" target="_blank" rel="noopener">🦋 Bluesky</a>
+      </div>
+    </div>
+
   </div>
 
   <div class="section-label mt-lg">Finançament i agraïments</div>
   <div class="info-grid">
-    <div class="info-item"><div class="info-item-label">Finançat per</div><div class="info-item-value">Ministerio de Ciencia e Innovación</div></div>
-    <div class="info-item"><div class="info-item-label">Referència del projecte</div><div class="info-item-value">PID2023-XXXXXX</div></div>
+    <div class="info-item"><div class="info-item-label">Finançat per</div><div class="info-item-value">Ministeri de Ciència, Innovació i Universitats</div></div>
+    <div class="info-item"><div class="info-item-label">Projecte</div><div class="info-item-value">VEARLYDEM</div></div>
     <div class="info-item"><div class="info-item-label">Institució amfitriona</div><div class="info-item-value">Universitat Pompeu Fabra</div></div>
     <div class="info-item"><div class="info-item-label">Període</div><div class="info-item-value">2023–2026</div></div>
   </div>
