@@ -328,9 +328,16 @@ main.content { padding: 0 !important; }
 
 /* ── Map page ── */
 .map-page-shell {
-  width: 100%;
+  width: min(1680px, calc(100vw - 3rem));
   max-width: 100%;
+  margin: 0 auto;
   overflow-x: hidden;
+}
+
+@media (max-width: 860px) {
+  .map-page-shell {
+    width: calc(100vw - 1rem);
+  }
 }
 
 /* ── Search widget ── */
