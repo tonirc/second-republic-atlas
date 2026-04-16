@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Book – Electoral Atlas · Second Republic</title>
+<title>Métodos – Atlas Electoral · Segunda República</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -70,8 +70,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -85,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Electoral Atlas · Second Republic</span>
+    <span class="navbar-title">Atlas Electoral · Segunda República</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -96,31 +94,31 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
+<span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./map.html"> 
-<span class="menu-text">Map</span></a>
+<span class="menu-text">Mapa</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./codebook.html"> 
-<span class="menu-text">Dataset</span></a>
+<span class="menu-text">Datos</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./methods.html"> 
-<span class="menu-text">Methods</span></a>
+    <a class="nav-link active" href="./methods.html" aria-current="page"> 
+<span class="menu-text">Métodos</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./contribute.html"> 
-<span class="menu-text">Contribute</span></a>
+<span class="menu-text">Contribuir</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Sobre el proyecto</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./book.html" aria-current="page"> 
-<span class="menu-text">The Book</span></a>
+    <a class="nav-link" href="./book.html"> 
+<span class="menu-text">El Libro</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -139,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The Book</h1>
+<h1 class="title">Métodos</h1>
 </div>
 
 
@@ -157,147 +155,128 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="masthead">
-  <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
+  <span>Atlas Electoral · Segunda República Española · 1931–1936</span>
   <div class="lang-switcher">
-    <a href="../en/book.html" class="lang-btn active">EN</a>
-    <a href="../es/book.html" class="lang-btn">ES</a>
-    <a href="../ca/book.html" class="lang-btn">CA</a>
+    <a href="../en/methods.html" class="lang-btn">EN</a>
+    <a href="../es/methods.html" class="lang-btn active">ES</a>
+    <a href="../ca/methods.html" class="lang-btn">CA</a>
   </div>
 </div>
 
 <div class="page-header">
   <div class="page-header-flag"></div>
-  <div class="page-header-label">Publication</div>
-  <h1 class="page-header-title">The <em>Book</em> Project</h1>
-  <p class="page-header-sub">A monograph on the electoral geography of the Second Republic</p>
+  <div class="page-header-label">Detrás de los datos</div>
+  <h1 class="page-header-title">Cómo construimos el conjunto de datos</h1>
+  <p class="page-header-sub">Fuentes, procedimientos y decisiones metodológicas</p>
 </div>
 
 <section class="content-section">
 
-  <!-- BOOK FEATURE -->
-  <div class="book-feature">
-    <!-- Book cover placeholder — replace inner content with <img src="..." class="book-cover-img"> -->
-    <div class="book-cover">
-      <div class="book-cover-flag"></div>
-      <div class="book-cover-sub">Electoral Geography</div>
-      <div class="book-cover-title">Votes, Territory &amp; the Fall of the Republic</div>
-      <div class="book-cover-sub" style="margin-top:auto;">Your Name · 2025</div>
+  <!-- OVERVIEW -->
+  <div class="section-label">Resumen</div>
+  <h2 class="section-title anchored">De los archivos al atlas</h2>
+  <p class="section-body">
+    Construir un conjunto de datos consistente a nivel municipal para tres elecciones celebradas
+    hace casi un siglo exigió combinar fuentes de naturaleza muy distinta: gacetas provinciales
+    impresas, registros de archivo en el Archivo Histórico Nacional, copias digitalizadas de la
+    <em>Gaceta de Madrid</em> y archivos regionales de las cincuenta provincias españolas.
+  </p>
+  <p class="section-body">
+    Esta página documenta los principales pasos de ese proceso: desde la identificación de
+    fuentes y la transcripción de los resultados brutos hasta la armonización de los límites
+    municipales y la validación de las cifras finales.
+  </p>
+
+  <!-- PROJECT HISTORY -->
+  <div class="section-label mt-lg">Historia del proyecto</div>
+  <h3 class="section-title anchored" style="font-size:1.3rem;">Cómo llegamos hasta aquí</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2021</div>
+      <div class="timeline-text">Proyecto concebido como parte de un programa de investigación más amplio sobre la economía política del período de entreguerras en Europa.</div>
     </div>
-
-    <!-- Book details -->
-    <div>
-      <div class="section-label">About the book</div>
-      <h2 class="section-title anchored" style="font-size:1.5rem;">Votes, Territory, and the Fall of the Spanish Republic</h2>
-
-      <div class="book-meta-row">
-        <div class="book-meta-item">
-          <div class="book-meta-label">Author</div>
-          <div class="book-meta-value">Your Name</div>
-        </div>
-        <div class="book-meta-item">
-          <div class="book-meta-label">Publisher</div>
-          <div class="book-meta-value">TBA</div>
-        </div>
-        <div class="book-meta-item">
-          <div class="book-meta-label">Expected</div>
-          <div class="book-meta-value">2026</div>
-        </div>
-        <div class="book-meta-item">
-          <div class="book-meta-label">Language</div>
-          <div class="book-meta-value">English</div>
-        </div>
-      </div>
-
-      <p class="section-body" style="font-size:0.95rem;">
-        This book examines the territorial logic of political competition during the Spanish
-        Second Republic. Drawing on a new municipal-level dataset of electoral results
-        (1931–1936), it reconstructs how geography, class, religion, and local political
-        organisations shaped voting patterns — and how those patterns translated into
-        polarisation, democratic breakdown, and civil war.
-      </p>
-      <p class="section-body" style="font-size:0.95rem;">
-        This atlas is the interactive companion to the book. All maps and figures can be
-        explored here, and the underlying dataset is made freely available for replication
-        and further research.
-      </p>
-
-      <a href="#" class="book-cta">✉ &nbsp; Notify me on publication</a>
-      <a href="../en/contribute.html" class="book-cta book-cta-outline">Contribute data</a>
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-text">Primera fase de recopilación de datos de archivo: capitales de provincia y municipios grandes digitalizados a partir de la <em>Gaceta de Madrid</em>.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-text">Financiación obtenida. Recopilación de datos ampliada a las 50 provincias. Asistente de investigación contratado/a.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-text">Versión beta del atlas publicada. Libro de códigos y artículo metodológico enviados a revisión por pares.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-text">Publicación pública del conjunto de datos completo y de este atlas interactivo.</div>
     </div>
   </div>
 
-  <!-- CHAPTER LIST -->
-  <div class="section-label mt-lg">Contents</div>
-  <h3 class="section-title anchored" style="font-size:1.3rem;">Chapter outline</h3>
-  <div class="book-chapters">
-    <div class="chapter-item">
-      <div class="chapter-num">Intro</div>
-      <div>
-        <div class="chapter-title">Introduction: The Geography of Democracy</div>
-        <div class="chapter-desc">Why electoral geography matters for understanding the Republic's trajectory.</div>
-      </div>
-    </div>
-    <div class="chapter-item">
-      <div class="chapter-num">01</div>
-      <div>
-        <div class="chapter-title">Data and Methods</div>
-        <div class="chapter-desc">Sources, coding decisions, coverage, and limitations of the municipal dataset.</div>
-      </div>
-    </div>
-    <div class="chapter-item">
-      <div class="chapter-num">02</div>
-      <div>
-        <div class="chapter-title">April 1931: The Founding Election</div>
-        <div class="chapter-desc">How the republican coalition swept Spain and where it was already weak.</div>
-      </div>
-    </div>
-    <div class="chapter-item">
-      <div class="chapter-num">03</div>
-      <div>
-        <div class="chapter-title">November 1933: The Reversal</div>
-        <div class="chapter-desc">Women's suffrage, fragmented left, and the rise of CEDA in the countryside.</div>
-      </div>
-    </div>
-    <div class="chapter-item">
-      <div class="chapter-num">04</div>
-      <div>
-        <div class="chapter-title">February 1936: The Popular Front</div>
-        <div class="chapter-desc">A narrow popular vote majority, its geographic distribution, and its contested aftermath.</div>
-      </div>
-    </div>
-    <div class="chapter-item">
-      <div class="chapter-num">05</div>
-      <div>
-        <div class="chapter-title">Electoral Geography and the Civil War</div>
-        <div class="chapter-desc">Does the 1936 electoral map predict the geography of the 1936–1939 conflict?</div>
-      </div>
-    </div>
-    <div class="chapter-item">
-      <div class="chapter-num">Concl.</div>
-      <div>
-        <div class="chapter-title">Conclusion: Democracy, Territory, and Polarisation</div>
-        <div class="chapter-desc">Comparative implications for interwar Europe and contemporary democracies.</div>
-      </div>
-    </div>
+  <!-- DATA SOURCES -->
+  <div class="section-label mt-lg">Fuentes de datos</div>
+  <h3 class="section-title anchored" style="font-size:1.3rem;">De dónde provienen los números</h3>
+  <p class="section-body">
+    Los resultados electorales se publicaron a nivel de circunscripción en las fuentes oficiales,
+    pero los desglosss municipales parciales se recogen en los registros de las diputaciones
+    provinciales, la prensa local y los libros de actas manuscritos depositados en el Archivo
+    Histórico Nacional. Hemos combinado las tres fuentes para maximizar la cobertura geográfica.
+  </p>
+  <p class="section-body">
+    Los límites municipales se derivan de la cartografía del Censo de 1930 y han sido
+    armonizados para permitir comparaciones entre años electorales, teniendo en cuenta las
+    fusiones y segregaciones municipales que se produjeron durante la República.
+  </p>
+
+  <!-- IMAGE GALLERY PLACEHOLDER -->
+  <div class="section-label mt-lg">Ejemplos de fuentes</div>
+  <h3 class="section-title anchored" style="font-size:1.3rem;">Cómo son los originales</h3>
+  <p class="section-body">
+    A continuación se muestran ejemplos de las fuentes primarias utilizadas en la recopilación de datos.
+    <!-- Sustituir los recuadros de marcador por etiquetas <img> reales cuando las imágenes estén listas -->
+  </p>
+
+  <div class="methods-gallery">
+    <figure class="methods-figure figure">
+      <!-- <img src="../images/methods/gaceta-example.jpg" alt="Gaceta de Madrid, resultados 1931"> -->
+      <div class="methods-img-placeholder">Marcador de imagen — ej. Gaceta de Madrid (1931)</div>
+      <figcaption>Resultados oficiales publicados en la <em>Gaceta de Madrid</em>, junio de 1931.</figcaption>
+    </figure>
+    <figure class="methods-figure figure">
+      <!-- <img src="../images/methods/archive-ledger.jpg" alt="Libro de actas, archivos provinciales"> -->
+      <div class="methods-img-placeholder">Marcador de imagen — ej. Libro de actas de archivo provincial</div>
+      <figcaption>Recuentos manuscritos de votos de un archivo de diputación provincial.</figcaption>
+    </figure>
+    <figure class="methods-figure figure">
+      <!-- <img src="../images/methods/coding-sheet.jpg" alt="Ficha de codificación de datos"> -->
+      <div class="methods-img-placeholder">Marcador de imagen — ej. Ficha de codificación de datos</div>
+      <figcaption>Ficha de codificación estandarizada utilizada durante la entrada de datos.</figcaption>
+    </figure>
   </div>
 
-  <!-- RELATED PUBLICATIONS -->
-  <div class="section-label mt-lg">Related outputs</div>
-  <div class="info-grid" style="grid-template-columns:1fr;">
-    <div class="info-item">
-      <div class="info-item-label">Working paper</div>
-      <div class="info-item-value" style="font-size:0.9rem;">"Municipal-Level Electoral Returns in the Spanish Second Republic: A New Dataset." 2024. <a href="#">Download</a></div>
-    </div>
-    <div class="info-item">
-      <div class="info-item-label">Conference paper</div>
-      <div class="info-item-value" style="font-size:0.9rem;">Presented at APSA 2024, ECPR 2024. Slides available on request.</div>
-    </div>
-  </div>
+  <!-- CODING DECISIONS -->
+  <div class="section-label mt-lg">Decisiones de codificación</div>
+  <h3 class="section-title anchored" style="font-size:1.3rem;">Opciones clave y limitaciones</h3>
+  <p class="section-body">
+    Las etiquetas de partidos se estandarizaron a lo largo de las tres elecciones mediante un
+    esquema de clasificación coherente basado en el marco de familias de partidos del ECPR y
+    adaptado al contexto español. Cuando una coalición se presentó conjuntamente, los votos
+    se asignaron al partido principal salvo que se dispusiera de un desglose.
+  </p>
+  <p class="section-body">
+    Las cifras de participación se basan en el electorado registrado según el Censo de 1930.
+    Los municipios para los que no se pudieron recuperar resultados aparecen como datos
+    ausentes en el conjunto de datos y se muestran en gris en el mapa.
+  </p>
+  <p class="section-body">
+    Una descripción completa de cada variable, su fuente y las decisiones adoptadas durante
+    la codificación está disponible en la pestaña <a href="codebook.html">Datos</a>.
+  </p>
 
 </section>
 
 <footer class="site-footer">
-  <p>Electoral Atlas of the Spanish Second Republic &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+  <p>Atlas Electoral de la Segunda República Española &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
 </footer>
 
 

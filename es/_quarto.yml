@@ -15,7 +15,9 @@ website:
       - href: map.qmd
         text: "Mapa"
       - href: codebook.qmd
-        text: "Libro de códigos"
+        text: "Datos"
+      - href: methods.qmd
+        text: "Métodos"
       - href: contribute.qmd
         text: "Contribuir"
       - href: about.qmd

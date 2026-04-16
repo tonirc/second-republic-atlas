@@ -158,7 +158,7 @@ function initSearch() {
 const DEFAULT_VIEW = {center: [-3.7, 40.2], zoom: 5.5, bearing: 0, pitch: 0};
 
 const UI_TEXT = {
-  reset: 'Reset',
+  reset: 'Reset zoom',
   resetTitle: 'Reset default zoom',
   borders: 'Borders',
   bordersTitle: 'Toggle district borders'

@@ -374,6 +374,45 @@ main.content { padding: 0 !important; }
 .sug-name { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink); white-space: nowrap; }
 .sug-prov { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); white-space: nowrap; }
 
+/* ── Methods gallery ── */
+.methods-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.2rem;
+}
+.methods-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.methods-figure img {
+  width: 100%;
+  border: 1px solid var(--border);
+  display: block;
+}
+.methods-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #f0ebe0;
+  border: 1.5px dashed var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-align: center;
+  padding: 1rem;
+}
+.methods-figure figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
 .map-toolbar {
   display: flex;
   align-items: center;

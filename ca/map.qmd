@@ -151,7 +151,7 @@ function initSearch() {
 const DEFAULT_VIEW = {center: [-3.7, 40.2], zoom: 5.5, bearing: 0, pitch: 0};
 
 const UI_TEXT = {
-  reset: 'Reinicia',
+  reset: 'Reinicia zoom',
   resetTitle: 'Torna al zoom inicial',
   borders: 'Districtes',
   bordersTitle: 'Mostra o amaga els limits de districte'

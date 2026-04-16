@@ -1,0 +1,133 @@
+---
+title: "Métodos"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atlas Electoral · Segunda República Española · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../en/methods.html" class="lang-btn">EN</a>
+    <a href="../es/methods.html" class="lang-btn active">ES</a>
+    <a href="../ca/methods.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Detrás de los datos</div>
+  <h1 class="page-header-title">Cómo construimos el conjunto de datos</h1>
+  <p class="page-header-sub">Fuentes, procedimientos y decisiones metodológicas</p>
+</div>
+
+<section class="content-section">
+
+  <!-- OVERVIEW -->
+  <div class="section-label">Resumen</div>
+  <h2 class="section-title">De los archivos al atlas</h2>
+  <p class="section-body">
+    Construir un conjunto de datos consistente a nivel municipal para tres elecciones celebradas
+    hace casi un siglo exigió combinar fuentes de naturaleza muy distinta: gacetas provinciales
+    impresas, registros de archivo en el Archivo Histórico Nacional, copias digitalizadas de la
+    <em>Gaceta de Madrid</em> y archivos regionales de las cincuenta provincias españolas.
+  </p>
+  <p class="section-body">
+    Esta página documenta los principales pasos de ese proceso: desde la identificación de
+    fuentes y la transcripción de los resultados brutos hasta la armonización de los límites
+    municipales y la validación de las cifras finales.
+  </p>
+
+  <!-- PROJECT HISTORY -->
+  <div class="section-label mt-lg">Historia del proyecto</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Cómo llegamos hasta aquí</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2021</div>
+      <div class="timeline-text">Proyecto concebido como parte de un programa de investigación más amplio sobre la economía política del período de entreguerras en Europa.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-text">Primera fase de recopilación de datos de archivo: capitales de provincia y municipios grandes digitalizados a partir de la <em>Gaceta de Madrid</em>.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-text">Financiación obtenida. Recopilación de datos ampliada a las 50 provincias. Asistente de investigación contratado/a.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-text">Versión beta del atlas publicada. Libro de códigos y artículo metodológico enviados a revisión por pares.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-text">Publicación pública del conjunto de datos completo y de este atlas interactivo.</div>
+    </div>
+  </div>
+
+  <!-- DATA SOURCES -->
+  <div class="section-label mt-lg">Fuentes de datos</div>
+  <h3 class="section-title" style="font-size:1.3rem;">De dónde provienen los números</h3>
+  <p class="section-body">
+    Los resultados electorales se publicaron a nivel de circunscripción en las fuentes oficiales,
+    pero los desglosss municipales parciales se recogen en los registros de las diputaciones
+    provinciales, la prensa local y los libros de actas manuscritos depositados en el Archivo
+    Histórico Nacional. Hemos combinado las tres fuentes para maximizar la cobertura geográfica.
+  </p>
+  <p class="section-body">
+    Los límites municipales se derivan de la cartografía del Censo de 1930 y han sido
+    armonizados para permitir comparaciones entre años electorales, teniendo en cuenta las
+    fusiones y segregaciones municipales que se produjeron durante la República.
+  </p>
+
+  <!-- IMAGE GALLERY PLACEHOLDER -->
+  <div class="section-label mt-lg">Ejemplos de fuentes</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Cómo son los originales</h3>
+  <p class="section-body">
+    A continuación se muestran ejemplos de las fuentes primarias utilizadas en la recopilación de datos.
+    <!-- Sustituir los recuadros de marcador por etiquetas <img> reales cuando las imágenes estén listas -->
+  </p>
+
+  <div class="methods-gallery">
+    <figure class="methods-figure">
+      <!-- <img src="../images/methods/gaceta-example.jpg" alt="Gaceta de Madrid, resultados 1931"> -->
+      <div class="methods-img-placeholder">Marcador de imagen — ej. Gaceta de Madrid (1931)</div>
+      <figcaption>Resultados oficiales publicados en la <em>Gaceta de Madrid</em>, junio de 1931.</figcaption>
+    </figure>
+    <figure class="methods-figure">
+      <!-- <img src="../images/methods/archive-ledger.jpg" alt="Libro de actas, archivos provinciales"> -->
+      <div class="methods-img-placeholder">Marcador de imagen — ej. Libro de actas de archivo provincial</div>
+      <figcaption>Recuentos manuscritos de votos de un archivo de diputación provincial.</figcaption>
+    </figure>
+    <figure class="methods-figure">
+      <!-- <img src="../images/methods/coding-sheet.jpg" alt="Ficha de codificación de datos"> -->
+      <div class="methods-img-placeholder">Marcador de imagen — ej. Ficha de codificación de datos</div>
+      <figcaption>Ficha de codificación estandarizada utilizada durante la entrada de datos.</figcaption>
+    </figure>
+  </div>
+
+  <!-- CODING DECISIONS -->
+  <div class="section-label mt-lg">Decisiones de codificación</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Opciones clave y limitaciones</h3>
+  <p class="section-body">
+    Las etiquetas de partidos se estandarizaron a lo largo de las tres elecciones mediante un
+    esquema de clasificación coherente basado en el marco de familias de partidos del ECPR y
+    adaptado al contexto español. Cuando una coalición se presentó conjuntamente, los votos
+    se asignaron al partido principal salvo que se dispusiera de un desglose.
+  </p>
+  <p class="section-body">
+    Las cifras de participación se basan en el electorado registrado según el Censo de 1930.
+    Los municipios para los que no se pudieron recuperar resultados aparecen como datos
+    ausentes en el conjunto de datos y se muestran en gris en el mapa.
+  </p>
+  <p class="section-body">
+    Una descripción completa de cada variable, su fuente y las decisiones adoptadas durante
+    la codificación está disponible en la pestaña <a href="codebook.html">Datos</a>.
+  </p>
+
+</section>
+
+<footer class="site-footer">
+  <p>Atlas Electoral de la Segunda República Española &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

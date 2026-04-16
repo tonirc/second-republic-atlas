@@ -47,32 +47,6 @@ format:
     <cite>Project description, 2024</cite>
   </div>
 
-  <!-- TIMELINE -->
-  <div class="section-label mt-lg">Project history</div>
-  <h3 class="section-title" style="font-size:1.3rem;">How we got here</h3>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-year">2021</div>
-      <div class="timeline-text">Project conceived as part of a broader research programme on the political economy of interwar Europe.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-year">2022</div>
-      <div class="timeline-text">First archival data collection phase: provincial capitals and large municipalities digitised from the Gaceta de Madrid.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-year">2023</div>
-      <div class="timeline-text">Funding secured. Data collection expanded to all 50 provinces. Research assistant hired.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-year">2024</div>
-      <div class="timeline-text">Beta version of the atlas launched. Codebook and methodology paper submitted for peer review.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-year">2025</div>
-      <div class="timeline-text">Public release of the full dataset and this interactive atlas.</div>
-    </div>
-  </div>
-
   <!-- TEAM -->
   <div class="section-label mt-lg">The team</div>
   <h3 class="section-title" style="font-size:1.3rem;">Who we are</h3>

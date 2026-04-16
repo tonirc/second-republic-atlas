@@ -33,15 +33,6 @@ format:
     <cite>Descripció del projecte, 2024</cite>
   </div>
 
-  <div class="section-label mt-lg">Història del projecte</div>
-  <div class="timeline">
-    <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-text">Projecte concebut com a part d'un programa de recerca més ampli sobre l'economia política del període d'entreguerres a Europa.</div></div>
-    <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-text">Primera fase de recollida de dades d'arxiu: capitals de província i municipis grans digitalitzats a partir de la Gaceta de Madrid.</div></div>
-    <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-text">Finançament obtingut. Recollida de dades ampliada a les 50 províncies.</div></div>
-    <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-text">Versió beta de l'atles publicada. Llibre de codis i article metodològic enviats a revisió per parells.</div></div>
-    <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-text">Publicació pública del conjunt de dades complet i d'aquest atles interactiu.</div></div>
-  </div>
-
   <div class="section-label mt-lg">L'equip</div>
   <div class="team-grid">
     <div class="team-card">

@@ -1,0 +1,133 @@
+---
+title: "Mètodes"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Atles Electoral · Segona República Espanyola · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../en/methods.html" class="lang-btn">EN</a>
+    <a href="../es/methods.html" class="lang-btn">ES</a>
+    <a href="../ca/methods.html" class="lang-btn active">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Darrere les dades</div>
+  <h1 class="page-header-title">Com vam construir el conjunt de dades</h1>
+  <p class="page-header-sub">Fonts, procediments i decisions metodològiques</p>
+</div>
+
+<section class="content-section">
+
+  <!-- OVERVIEW -->
+  <div class="section-label">Resum</div>
+  <h2 class="section-title">Dels arxius a l'atles</h2>
+  <p class="section-body">
+    Construir un conjunt de dades consistent a nivell municipal per a tres eleccions celebrades
+    fa gairebé un segle va requerir combinar fonts de naturalesa molt diversa: gasetes provincials
+    impreses, registres d'arxiu a l'Archivo Histórico Nacional, còpies digitalitzades de la
+    <em>Gaceta de Madrid</em> i arxius regionals de les cinquanta províncies espanyoles.
+  </p>
+  <p class="section-body">
+    Aquesta pàgina documenta els principals passos d'aquest procés: des de la identificació de
+    fonts i la transcripció dels resultats bruts fins a l'harmonització dels límits municipals
+    i la validació de les xifres finals.
+  </p>
+
+  <!-- PROJECT HISTORY -->
+  <div class="section-label mt-lg">Història del projecte</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Com hem arribat fins aquí</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2021</div>
+      <div class="timeline-text">Projecte concebut com a part d'un programa de recerca més ampli sobre l'economia política del període d'entreguerres a Europa.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-text">Primera fase de recollida de dades d'arxiu: capitals de província i municipis grans digitalitzats a partir de la <em>Gaceta de Madrid</em>.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-text">Finançament obtingut. Recollida de dades ampliada a les 50 províncies. Assistent de recerca contractat/da.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-text">Versió beta de l'atles publicada. Llibre de codis i article metodològic enviats a revisió per parells.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-text">Publicació pública del conjunt de dades complet i d'aquest atles interactiu.</div>
+    </div>
+  </div>
+
+  <!-- DATA SOURCES -->
+  <div class="section-label mt-lg">Fonts de dades</div>
+  <h3 class="section-title" style="font-size:1.3rem;">D'on provenen les xifres</h3>
+  <p class="section-body">
+    Els resultats electorals es van publicar a nivell de circumscripció en les fonts oficials,
+    però els desglossaments municipals parcials consten en els registres de les diputacions
+    provincials, la premsa local i els llibres d'actes manuscrits dipositats a l'Archivo
+    Histórico Nacional. Hem combinat les tres fonts per maximitzar la cobertura geogràfica.
+  </p>
+  <p class="section-body">
+    Els límits municipals es deriven de la cartografia del Cens de 1930 i han estat
+    harmonitzats per permetre comparacions entre anys electorals, tenint en compte les
+    fusions i segregacions municipals que es van produir durant la República.
+  </p>
+
+  <!-- IMAGE GALLERY PLACEHOLDER -->
+  <div class="section-label mt-lg">Exemples de fonts</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Com són els originals</h3>
+  <p class="section-body">
+    A continuació es mostren exemples de les fonts primàries utilitzades en la recollida de dades.
+    <!-- Substituir els recuadres de marcador per etiquetes <img> reals quan les imatges estiguin llestes -->
+  </p>
+
+  <div class="methods-gallery">
+    <figure class="methods-figure">
+      <!-- <img src="../images/methods/gaceta-example.jpg" alt="Gaceta de Madrid, resultats 1931"> -->
+      <div class="methods-img-placeholder">Marcador d'imatge — ex. Gaceta de Madrid (1931)</div>
+      <figcaption>Resultats oficials publicats a la <em>Gaceta de Madrid</em>, juny de 1931.</figcaption>
+    </figure>
+    <figure class="methods-figure">
+      <!-- <img src="../images/methods/archive-ledger.jpg" alt="Llibre d'actes, arxius provincials"> -->
+      <div class="methods-img-placeholder">Marcador d'imatge — ex. Llibre d'actes d'arxiu provincial</div>
+      <figcaption>Recomptes manuscrits de vots d'un arxiu de diputació provincial.</figcaption>
+    </figure>
+    <figure class="methods-figure">
+      <!-- <img src="../images/methods/coding-sheet.jpg" alt="Fitxa de codificació de dades"> -->
+      <div class="methods-img-placeholder">Marcador d'imatge — ex. Fitxa de codificació de dades</div>
+      <figcaption>Fitxa de codificació estandarditzada utilitzada durant l'entrada de dades.</figcaption>
+    </figure>
+  </div>
+
+  <!-- CODING DECISIONS -->
+  <div class="section-label mt-lg">Decisions de codificació</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Opcions clau i limitacions</h3>
+  <p class="section-body">
+    Les etiquetes de partits es van estandarditzar al llarg de les tres eleccions mitjançant un
+    esquema de classificació coherent basat en el marc de famílies de partits de l'ECPR i
+    adaptat al context espanyol. Quan una coalició es va presentar conjuntament, els vots
+    es van assignar al partit principal llevat que es disposés d'un desglossament.
+  </p>
+  <p class="section-body">
+    Les xifres de participació es basen en l'electorat registrat segons el Cens de 1930.
+    Els municipis per als quals no s'han pogut recuperar resultats apareixen com a dades
+    absents en el conjunt de dades i es mostren en gris al mapa.
+  </p>
+  <p class="section-body">
+    Una descripció completa de cada variable, la seva font i les decisions adoptades durant
+    la codificació està disponible a la pestanya <a href="codebook.html">Dades</a>.
+  </p>
+
+</section>
+
+<footer class="site-footer">
+  <p>Atles Electoral de la Segona República Espanyola &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

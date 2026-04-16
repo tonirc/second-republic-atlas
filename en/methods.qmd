@@ -1,0 +1,132 @@
+---
+title: "Methods"
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<div class="masthead">
+  <span>Electoral Atlas · Spanish Second Republic · 1931–1936</span>
+  <div class="lang-switcher">
+    <a href="../en/methods.html" class="lang-btn active">EN</a>
+    <a href="../es/methods.html" class="lang-btn">ES</a>
+    <a href="../ca/methods.html" class="lang-btn">CA</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-flag"></div>
+  <div class="page-header-label">Behind the data</div>
+  <h1 class="page-header-title">How We Built the Dataset</h1>
+  <p class="page-header-sub">Sources, procedures, and decisions behind the atlas</p>
+</div>
+
+<section class="content-section">
+
+  <!-- OVERVIEW -->
+  <div class="section-label">Overview</div>
+  <h2 class="section-title">From archives to atlas</h2>
+  <p class="section-body">
+    Building a consistent, municipality-level dataset for three elections held nearly a century
+    ago required combining sources of very different kinds: printed provincial gazettes, archival
+    records held at the Archivo Histórico Nacional, digitised copies of the <em>Gaceta de Madrid</em>,
+    and regional archives across Spain's fifty provinces.
+  </p>
+  <p class="section-body">
+    This page documents the main steps of that process — from identifying sources and transcribing
+    raw vote counts to harmonising municipal boundaries and validating the final figures.
+  </p>
+
+  <!-- PROJECT HISTORY -->
+  <div class="section-label mt-lg">Project history</div>
+  <h3 class="section-title" style="font-size:1.3rem;">How we got here</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2021</div>
+      <div class="timeline-text">Project conceived as part of a broader research programme on the political economy of interwar Europe.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-text">First archival data collection phase: provincial capitals and large municipalities digitised from the <em>Gaceta de Madrid</em>.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-text">Funding secured. Data collection expanded to all 50 provinces. Research assistant hired.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-text">Beta version of the atlas launched. Codebook and methodology paper submitted for peer review.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-text">Public release of the full dataset and this interactive atlas.</div>
+    </div>
+  </div>
+
+  <!-- DATA SOURCES -->
+  <div class="section-label mt-lg">Data sources</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Where the numbers come from</h3>
+  <p class="section-body">
+    Election results were reported at the district (<em>circunscripción</em>) level in official publications,
+    but partial municipal breakdowns were recorded in provincial diputación records, local press,
+    and in the handwritten ledgers deposited at the Archivo Histórico Nacional. We combined
+    all three to maximise geographic coverage.
+  </p>
+  <p class="section-body">
+    Municipal boundaries are derived from the 1930 Census cartography and have been
+    harmonised to allow comparisons across election years, accounting for municipal mergers
+    and splits that occurred during the Republic.
+  </p>
+
+  <!-- IMAGE GALLERY PLACEHOLDER -->
+  <div class="section-label mt-lg">Source examples</div>
+  <h3 class="section-title" style="font-size:1.3rem;">What the originals look like</h3>
+  <p class="section-body">
+    Below are examples of the primary sources used in the data collection process.
+    <!-- Replace the placeholder boxes below with actual <img> tags once images are ready -->
+  </p>
+
+  <div class="methods-gallery">
+    <figure class="methods-figure">
+      <!-- <img src="../images/methods/gaceta-example.jpg" alt="Gaceta de Madrid, 1931 election results"> -->
+      <div class="methods-img-placeholder">Image placeholder — e.g. Gaceta de Madrid (1931)</div>
+      <figcaption>Official results published in the <em>Gaceta de Madrid</em>, June 1931.</figcaption>
+    </figure>
+    <figure class="methods-figure">
+      <!-- <img src="../images/methods/archive-ledger.jpg" alt="Archival ledger, provincial records"> -->
+      <div class="methods-img-placeholder">Image placeholder — e.g. Provincial archive ledger</div>
+      <figcaption>Handwritten vote tallies from a provincial diputación archive.</figcaption>
+    </figure>
+    <figure class="methods-figure">
+      <!-- <img src="../images/methods/coding-sheet.jpg" alt="Data coding sheet"> -->
+      <div class="methods-img-placeholder">Image placeholder — e.g. Data coding sheet</div>
+      <figcaption>Standardised coding sheet used during data entry.</figcaption>
+    </figure>
+  </div>
+
+  <!-- CODING DECISIONS -->
+  <div class="section-label mt-lg">Coding decisions</div>
+  <h3 class="section-title" style="font-size:1.3rem;">Key choices and limitations</h3>
+  <p class="section-body">
+    Party labels were standardised across all three elections using a consistent classification
+    scheme based on the ECPR party families framework and adapted for the Spanish context.
+    Where a coalition ran jointly, votes were allocated to the leading party unless a breakdown
+    was available.
+  </p>
+  <p class="section-body">
+    Turnout figures are based on the registered electorate as recorded in the 1930 Census.
+    Municipalities for which no results could be recovered are indicated as missing in the dataset
+    and appear grey on the map.
+  </p>
+  <p class="section-body">
+    A full description of every variable, its source, and the decisions made during coding is
+    available in the <a href="dataset.html">Dataset</a> tab.
+  </p>
+
+</section>
+
+<footer class="site-footer">
+  <p>Electoral Atlas of the Spanish Second Republic &nbsp;·&nbsp; Universitat Pompeu Fabra &nbsp;·&nbsp; 2025</p>
+</footer>
+```

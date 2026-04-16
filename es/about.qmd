@@ -33,15 +33,6 @@ format:
     <cite>Descripción del proyecto, 2024</cite>
   </div>
 
-  <div class="section-label mt-lg">Historia del proyecto</div>
-  <div class="timeline">
-    <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-text">Proyecto concebido como parte de un programa de investigación más amplio sobre la economía política del período de entreguerras en Europa.</div></div>
-    <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-text">Primera fase de recopilación de datos de archivo: capitales de provincia y municipios grandes digitalizados a partir de la Gaceta de Madrid.</div></div>
-    <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-text">Financiación obtenida. Recopilación de datos ampliada a las 50 provincias.</div></div>
-    <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-text">Versión beta del atlas publicada. Libro de códigos y artículo metodológico enviados a revisión por pares.</div></div>
-    <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-text">Publicación pública del conjunto de datos completo y de este atlas interactivo.</div></div>
-  </div>
-
   <div class="section-label mt-lg">El equipo</div>
   <div class="team-grid">
     <div class="team-card">
