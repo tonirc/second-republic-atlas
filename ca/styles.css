@@ -500,6 +500,27 @@ main.content { padding: 0 !important; }
 }
 
 .map-container { position: relative; }
+.map-selection-notice {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 12;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px var(--shadow);
+  border-radius: 3px;
+  padding: 0.45rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink);
+  pointer-events: none;
+  max-width: min(320px, calc(100% - 2rem));
+}
+
+.map-selection-notice[hidden] { display: none; }
+
 .map-extra-controls .map-util-btn {
   min-width: 112px;
   min-height: 30px;

@@ -192,6 +192,11 @@ ul.task-list li input[type="checkbox"] {
     <ul class="search-suggestions" id="search-suggestions" hidden=""></ul>
   </div>
   <div class="map-zoom-filters">
+    <select class="map-filter-select" id="basemap-select" aria-label="Select basemap">
+      <option value="positron">Basemap: Light</option>
+      <option value="voyager">Basemap: Streets</option>
+      <option value="darkmatter">Basemap: Dark</option>
+    </select>
     <select class="map-filter-select" id="community-select" aria-label="Select autonomous community">
       <option value="">Autonomous community…</option>
     </select>
@@ -205,6 +210,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- MAP -->
 <div class="map-container">
   <div id="map"></div>
+  <div class="map-selection-notice" id="selection-notice" hidden=""></div>
   <div class="map-legend">
     <div class="legend-title" id="legend-title">Left coalition</div>
     <div class="legend-gradient" id="legend-gradient" style="background:linear-gradient(to right,#d73027,#fc8d59,#ffffbf,#91cf60,#1a9850)"></div>
@@ -279,7 +285,7 @@ let districtIndex33_36 = [];
 
 const PROV_TO_COMMUNITY = {
   'Albacete': 'Castilla-La Mancha',
-  'Alicante/Alacant': 'Comunitat Valenciana',
+  'Alicante/Alacant': 'País Valencià',
   'Almería': 'Andalusia',
   'Araba/Álava': 'Basque Country',
   'Asturias': 'Asturias',
@@ -289,7 +295,7 @@ const PROV_TO_COMMUNITY = {
   'Bizkaia': 'Basque Country',
   'Burgos': 'Castile and Leon',
   'Cantabria': 'Cantabria',
-  'Castellón/Castelló': 'Comunitat Valenciana',
+  'Castellón/Castelló': 'País Valencià',
   'Ceuta': 'Ceuta',
   'Ciudad Real': 'Castilla-La Mancha',
   'Coruña, A': 'Galicia',
@@ -325,7 +331,7 @@ const PROV_TO_COMMUNITY = {
   'Tarragona': 'Catalonia',
   'Teruel': 'Aragon',
   'Toledo': 'Castilla-La Mancha',
-  'Valencia/València': 'Comunitat Valenciana',
+  'Valencia/València': 'País Valencià',
   'Valladolid': 'Castile and Leon',
   'Zamora': 'Castile and Leon',
   'Zaragoza': 'Aragon',
@@ -431,18 +437,26 @@ function initGeoSelectors() {
 
   communitySelect.addEventListener('change', () => {
     const selected = communityIndex.find(c => c.name === communitySelect.value);
-    if (!selected) return;
+    if (!selected) {
+      showSelectionNotice('', '');
+      return;
+    }
     districtSelect.selectedIndex = 0;
     map.fitBounds(selected.bbox, {padding: 55, maxZoom: 8.5, duration: 800});
+    showSelectionNotice(UI_TEXT.selectedCommunity, selected.name);
   });
 
   districtSelect.addEventListener('change', () => {
     const is1931 = currentYear === 1931;
     const districts = is1931 ? districtIndex31 : districtIndex33_36;
     const index = Number(districtSelect.value);
-    if (!Number.isInteger(index) || !districts[index]) return;
+    if (!Number.isInteger(index) || !districts[index]) {
+      showSelectionNotice('', '');
+      return;
+    }
     communitySelect.selectedIndex = 0;
     map.fitBounds(districts[index].bbox, {padding: 55, maxZoom: 10, duration: 800});
+    showSelectionNotice(UI_TEXT.selectedDistrict, districts[index].name);
   });
 }
 
@@ -494,13 +508,32 @@ const UI_TEXT = {
   reset: 'Reset zoom',
   resetTitle: 'Reset default zoom',
   borders: 'Borders',
-  bordersTitle: 'Toggle district borders'
+  bordersTitle: 'Toggle district borders',
+  selectedCommunity: 'Autonomous community',
+  selectedDistrict: 'District'
 };
+
+const BASEMAP_STYLES = {
+  positron: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+  voyager: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+  darkmatter: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
+};
+
+function showSelectionNotice(kind, name) {
+  const notice = document.getElementById('selection-notice');
+  if (!notice) return;
+  if (!name) {
+    notice.hidden = true;
+    return;
+  }
+  notice.textContent = `${kind}: ${name}`;
+  notice.hidden = false;
+}
 
 // ── Map ────────────────────────────────────────────────────────────────────
 const map = new maplibregl.Map({
   container: 'map',
-  style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+  style: BASEMAP_STYLES.positron,
   center: DEFAULT_VIEW.center, zoom: DEFAULT_VIEW.zoom, minZoom: 4, maxZoom: 14
 });
 map.addControl(new maplibregl.NavigationControl(), 'top-left');
@@ -510,6 +543,24 @@ const popup = new maplibregl.Popup({closeButton: false, closeOnClick: false, max
 let districtToggleButton = null;
 let lockedMunicipioId = null;
 let lockedMunicipioProps = null;
+let hoveredId = null;
+
+const geoDataPromise = Promise.all([
+  fetch('../municipios.geojson').then(r => r.json()),
+  fetch('../districts_31.geojson').then(r => r.json()),
+  fetch('../districts_33_36.geojson').then(r => r.json())
+]);
+
+function initBasemapSelector() {
+  const basemapSelect = document.getElementById('basemap-select');
+  if (!basemapSelect) return;
+
+  basemapSelect.addEventListener('change', () => {
+    const styleUrl = BASEMAP_STYLES[basemapSelect.value];
+    if (!styleUrl) return;
+    map.setStyle(styleUrl);
+  });
+}
 
 function districtLayerVisibility(targetYear) {
   if (!showDistricts) return 'none';
@@ -580,6 +631,7 @@ function addMapUtilityControls() {
 addMapUtilityControls();
 initSearch();
 initGeoSelectors();
+initBasemapSelector();
 
 function colorExpression() {
   const cfg  = VAR_CONFIG[currentVar];
@@ -587,42 +639,7 @@ function colorExpression() {
   return ['case', ['!', ['has', prop]], '#cccccc', ['==', ['get', prop], null], '#cccccc', cfg.ramp(prop)];
 }
 
-map.on('load', () => {
-  map.addSource('municipios', {type: 'geojson', data: '../municipios.geojson', generateId: true});
-  map.addSource('districts_31', {type: 'geojson', data: '../districts_31.geojson'});
-  map.addSource('districts_33_36', {type: 'geojson', data: '../districts_33_36.geojson'});
-
-  map.addLayer({id: 'municipios-fill', type: 'fill', source: 'municipios',
-    paint: {'fill-color': colorExpression(), 'fill-opacity': 0.82}});
-  map.addLayer({id: 'municipios-line', type: 'line', source: 'municipios',
-    paint: {'line-color': '#888', 'line-width': ['interpolate',['linear'],['zoom'],5,0.4,10,1.2], 'line-opacity': 0.7}});
-  map.addLayer({id: 'districts-31-line', type: 'line', source: 'districts_31',
-    layout: {'visibility': districtLayerVisibility(1931)},
-    paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
-  map.addLayer({id: 'districts-33-36-line', type: 'line', source: 'districts_33_36',
-    layout: {'visibility': districtLayerVisibility(1933)},
-    paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
-  map.addLayer({id: 'municipios-hover', type: 'fill', source: 'municipios',
-    paint: {'fill-color': '#000', 'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.12,0]}});
-
-  updateDistrictLayers();
-
-  Promise.all([
-    fetch('../municipios.geojson').then(r => r.json()),
-    fetch('../districts_31.geojson').then(r => r.json()),
-    fetch('../districts_33_36.geojson').then(r => r.json())
-  ]).then(([municipiosData, district31Data, district3336Data]) => {
-    buildSearchIndex(municipiosData);
-    buildCommunityIndex(municipiosData);
-    districtIndex31 = buildDistrictIndex(district31Data, 'dist31');
-    districtIndex33_36 = buildDistrictIndex(district3336Data, 'dist33_36');
-    fillCommunitySelect();
-    updateDistrictSelectOptions();
-  });
-
-  let hoveredId = null;
-
-  map.on('mousemove', 'municipios-fill', (e) => {
+function handleMunicipioMousemove(e) {
     if (!e.features.length) return;
     map.getCanvas().style.cursor = 'pointer';
     if (lockedMunicipioId !== null) return;
@@ -631,18 +648,18 @@ map.on('load', () => {
     hoveredId = e.features[0].id;
     map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: true});
     popup.setLngLat(e.lngLat).setHTML(buildPopup(e.features[0].properties)).addTo(map);
-  });
+}
 
-  map.on('mouseleave', 'municipios-fill', () => {
+function handleMunicipioMouseleave() {
     map.getCanvas().style.cursor = '';
     if (lockedMunicipioId !== null) return;
 
     if (hoveredId !== null) map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: false});
     hoveredId = null;
     popup.remove();
-  });
+}
 
-  map.on('click', 'municipios-fill', (e) => {
+function handleMunicipioClick(e) {
     if (!e.features.length) return;
 
     const feature = e.features[0];
@@ -669,9 +686,9 @@ map.on('load', () => {
     lockedMunicipioProps = feature.properties;
     map.setFeatureState({source: 'municipios', id: lockedMunicipioId}, {hover: true});
     popup.setLngLat(e.lngLat).setHTML(buildPopup(feature.properties)).addTo(map);
-  });
+}
 
-  map.on('click', (e) => {
+function handleMapClick(e) {
     const clickedMunicipios = map.queryRenderedFeatures(e.point, {layers: ['municipios-fill']});
     if (clickedMunicipios.length || lockedMunicipioId === null) return;
 
@@ -679,7 +696,71 @@ map.on('load', () => {
     lockedMunicipioId = null;
     lockedMunicipioProps = null;
     popup.remove();
-  });
+}
+
+function bindMunicipioHandlers() {
+  map.off('mousemove', 'municipios-fill', handleMunicipioMousemove);
+  map.off('mouseleave', 'municipios-fill', handleMunicipioMouseleave);
+  map.off('click', 'municipios-fill', handleMunicipioClick);
+  map.off('click', handleMapClick);
+
+  map.on('mousemove', 'municipios-fill', handleMunicipioMousemove);
+  map.on('mouseleave', 'municipios-fill', handleMunicipioMouseleave);
+  map.on('click', 'municipios-fill', handleMunicipioClick);
+  map.on('click', handleMapClick);
+}
+
+function ensureElectionLayers() {
+  if (!map.getSource('municipios')) {
+    map.addSource('municipios', {type: 'geojson', data: '../municipios.geojson', generateId: true});
+  }
+  if (!map.getSource('districts_31')) {
+    map.addSource('districts_31', {type: 'geojson', data: '../districts_31.geojson'});
+  }
+  if (!map.getSource('districts_33_36')) {
+    map.addSource('districts_33_36', {type: 'geojson', data: '../districts_33_36.geojson'});
+  }
+
+  if (!map.getLayer('municipios-fill')) {
+    map.addLayer({id: 'municipios-fill', type: 'fill', source: 'municipios',
+      paint: {'fill-color': colorExpression(), 'fill-opacity': 0.82}});
+  }
+  if (!map.getLayer('municipios-line')) {
+    map.addLayer({id: 'municipios-line', type: 'line', source: 'municipios',
+      paint: {'line-color': '#888', 'line-width': ['interpolate',['linear'],['zoom'],5,0.4,10,1.2], 'line-opacity': 0.7}});
+  }
+  if (!map.getLayer('districts-31-line')) {
+    map.addLayer({id: 'districts-31-line', type: 'line', source: 'districts_31',
+      layout: {'visibility': districtLayerVisibility(1931)},
+      paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
+  }
+  if (!map.getLayer('districts-33-36-line')) {
+    map.addLayer({id: 'districts-33-36-line', type: 'line', source: 'districts_33_36',
+      layout: {'visibility': districtLayerVisibility(1933)},
+      paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
+  }
+  if (!map.getLayer('municipios-hover')) {
+    map.addLayer({id: 'municipios-hover', type: 'fill', source: 'municipios',
+      paint: {'fill-color': '#000', 'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.12,0]}});
+  }
+
+  updateDistrictLayers();
+  updateMap();
+  updateLockedPopup();
+  bindMunicipioHandlers();
+}
+
+geoDataPromise.then(([municipiosData, district31Data, district3336Data]) => {
+  buildSearchIndex(municipiosData);
+  buildCommunityIndex(municipiosData);
+  districtIndex31 = buildDistrictIndex(district31Data, 'dist31');
+  districtIndex33_36 = buildDistrictIndex(district3336Data, 'dist33_36');
+  fillCommunitySelect();
+  updateDistrictSelectOptions();
+});
+
+map.on('style.load', () => {
+  ensureElectionLayers();
 });
 
 // ── Popup ──────────────────────────────────────────────────────────────────
