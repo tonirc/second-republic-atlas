@@ -521,6 +521,24 @@ main.content { padding: 0 !important; }
 
 .map-selection-notice[hidden] { display: none; }
 
+.map-basemap-control {
+  padding: 2px;
+  background: #ffffff;
+}
+
+.map-basemap-select {
+  border: 0;
+  background: #ffffff;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.32rem 0.5rem;
+  min-width: 130px;
+  outline: none;
+}
+
 .map-extra-controls .map-util-btn {
   min-width: 112px;
   min-height: 30px;

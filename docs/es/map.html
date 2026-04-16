@@ -192,11 +192,6 @@ ul.task-list li input[type="checkbox"] {
     <ul class="search-suggestions" id="search-suggestions" hidden=""></ul>
   </div>
   <div class="map-zoom-filters">
-    <select class="map-filter-select" id="basemap-select" aria-label="Seleccionar mapa base">
-      <option value="positron">Mapa base: Claro</option>
-      <option value="voyager">Mapa base: Calles</option>
-      <option value="darkmatter">Mapa base: Oscuro</option>
-    </select>
     <select class="map-filter-select" id="community-select" aria-label="Seleccionar comunidad autonoma">
       <option value="">Comunidad autónoma…</option>
     </select>
@@ -506,10 +501,22 @@ const UI_TEXT = {
   selectedDistrict: 'Distrito'
 };
 
-const BASEMAP_STYLES = {
-  positron: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-  voyager: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
-  darkmatter: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
+const BASEMAPS = {
+  light: {
+    label: 'Claro',
+    tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', 'https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', 'https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+  },
+  streets: {
+    label: 'Calles',
+    tiles: ['https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', 'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', 'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png'],
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+  },
+  satellite: {
+    label: 'Satelite',
+    tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+    attribution: 'Tiles &copy; Esri'
+  }
 };
 
 function showSelectionNotice(kind, name) {
@@ -525,7 +532,11 @@ function showSelectionNotice(kind, name) {
 
 const map = new maplibregl.Map({
   container: 'map',
-  style: BASEMAP_STYLES.positron,
+  style: {
+    version: 8,
+    sources: {},
+    layers: [{id: 'bg', type: 'background', paint: {'background-color': '#f5f0e8'}}]
+  },
   center: DEFAULT_VIEW.center, zoom: DEFAULT_VIEW.zoom, minZoom: 4, maxZoom: 14
 });
 map.addControl(new maplibregl.NavigationControl(), 'top-left');
@@ -536,6 +547,7 @@ let districtToggleButton = null;
 let lockedMunicipioId = null;
 let lockedMunicipioProps = null;
 let hoveredId = null;
+let currentBasemap = 'light';
 
 const geoDataPromise = Promise.all([
   fetch('../municipios.geojson').then(r => r.json()),
@@ -543,15 +555,52 @@ const geoDataPromise = Promise.all([
   fetch('../districts_33_36.geojson').then(r => r.json())
 ]);
 
-function initBasemapSelector() {
-  const basemapSelect = document.getElementById('basemap-select');
-  if (!basemapSelect) return;
+function applyBasemap(key) {
+  const cfg = BASEMAPS[key];
+  if (!cfg) return;
+  currentBasemap = key;
 
-  basemapSelect.addEventListener('change', () => {
-    const styleUrl = BASEMAP_STYLES[basemapSelect.value];
-    if (!styleUrl) return;
-    map.setStyle(styleUrl);
+  if (map.getLayer('basemap-layer')) map.removeLayer('basemap-layer');
+  if (map.getSource('basemap-source')) map.removeSource('basemap-source');
+
+  map.addSource('basemap-source', {
+    type: 'raster',
+    tiles: cfg.tiles,
+    tileSize: 256,
+    attribution: cfg.attribution
   });
+
+  const beforeId = map.getLayer('municipios-fill') ? 'municipios-fill' : undefined;
+  map.addLayer({id: 'basemap-layer', type: 'raster', source: 'basemap-source'}, beforeId);
+}
+
+function addBasemapControl() {
+  class BasemapControl {
+    onAdd() {
+      const container = document.createElement('div');
+      container.className = 'maplibregl-ctrl maplibregl-ctrl-group map-basemap-control';
+
+      const select = document.createElement('select');
+      select.className = 'map-basemap-select';
+      select.setAttribute('aria-label', 'Seleccionar mapa base');
+
+      Object.entries(BASEMAPS).forEach(([key, cfg]) => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = cfg.label;
+        select.appendChild(option);
+      });
+
+      select.value = currentBasemap;
+      select.addEventListener('change', () => applyBasemap(select.value));
+      container.appendChild(select);
+      return container;
+    }
+
+    onRemove() {}
+  }
+
+  map.addControl(new BasemapControl(), 'top-right');
 }
 
 function districtLayerVisibility(targetYear) {
@@ -621,9 +670,9 @@ function addMapUtilityControls() {
 }
 
 addMapUtilityControls();
+addBasemapControl();
 initSearch();
 initGeoSelectors();
-initBasemapSelector();
 
 function colorExpression() {
   const cfg  = VAR_CONFIG[currentVar];
@@ -752,6 +801,7 @@ geoDataPromise.then(([municipiosData, district31Data, district3336Data]) => {
 });
 
 map.on('style.load', () => {
+  applyBasemap(currentBasemap);
   ensureElectionLayers();
 });
 
