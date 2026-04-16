@@ -67,6 +67,27 @@ Build all languages:
 
 After rendering, open docs/en/index.html (or docs/es/index.html, docs/ca/index.html) in a browser.
 
+## Automated Map Smoke Tests
+
+This repository includes a Playwright smoke test that validates key map interactions in all languages (EN/ES/CA):
+
+- Community focus is wired to dissolved community boundaries.
+- Barcelona (provincia) appears in the 1933-36 district dropdown.
+- Reset zoom clears community and district filters.
+
+Run locally:
+
+```bash
+npm install
+npx playwright install chromium
+npm run test:map-smoke
+```
+
+CI workflow:
+
+- GitHub Actions workflow: .github/workflows/map-smoke.yml
+- Runs automatically on push/PR (plus manual dispatch).
+
 ## Data Expectations For The Map
 
 Main map file: data/municipios.geojson
