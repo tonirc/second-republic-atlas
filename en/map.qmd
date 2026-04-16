@@ -10,6 +10,7 @@ format:
 ---
 
 ```{=html}
+<div class="map-page-shell">
 <!-- TOOLBAR -->
 <div class="map-toolbar">
   <span class="toolbar-label">Year:</span>
@@ -40,6 +41,7 @@ format:
       <div class="legend-swatch" style="background:#cccccc"></div><span>No data</span>
     </div>
   </div>
+</div>
 </div>
 
 <script>
@@ -97,16 +99,96 @@ const VAR_CONFIG = {
 // ── State ──────────────────────────────────────────────────────────────────
 let currentYear = 1936;
 let currentVar  = 'left';
+let showDistricts = true;
+
+const DEFAULT_VIEW = {center: [-3.7, 40.2], zoom: 5.5, bearing: 0, pitch: 0};
+
+const UI_TEXT = {
+  reset: 'Reset',
+  resetTitle: 'Reset default zoom',
+  borders: 'Borders',
+  bordersTitle: 'Toggle district borders'
+};
 
 // ── Map ────────────────────────────────────────────────────────────────────
 const map = new maplibregl.Map({
   container: 'map',
   style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-  center: [-3.7, 40.2], zoom: 5.5, minZoom: 4, maxZoom: 14
+  center: DEFAULT_VIEW.center, zoom: DEFAULT_VIEW.zoom, minZoom: 4, maxZoom: 14
 });
 map.addControl(new maplibregl.NavigationControl(), 'top-left');
 map.addControl(new maplibregl.ScaleControl({unit: 'metric'}), 'bottom-left');
 const popup = new maplibregl.Popup({closeButton: false, closeOnClick: false, maxWidth: '300px'});
+
+let districtToggleButton = null;
+
+function districtLayerVisibility(targetYear) {
+  if (!showDistricts) return 'none';
+  if (targetYear === 1931) return currentYear === 1931 ? 'visible' : 'none';
+  return (currentYear === 1933 || currentYear === 1936) ? 'visible' : 'none';
+}
+
+function updateDistrictLayers() {
+  if (map.getLayer('districts-31-line')) {
+    map.setLayoutProperty('districts-31-line', 'visibility', districtLayerVisibility(1931));
+  }
+  if (map.getLayer('districts-33-36-line')) {
+    map.setLayoutProperty('districts-33-36-line', 'visibility', districtLayerVisibility(1933));
+  }
+  updateDistrictToggleButton();
+}
+
+function updateDistrictToggleButton() {
+  if (!districtToggleButton) return;
+  if (showDistricts) {
+    districtToggleButton.classList.add('active');
+  } else {
+    districtToggleButton.classList.remove('active');
+  }
+}
+
+function addMapUtilityControls() {
+  class UtilityControl {
+    onAdd() {
+      const container = document.createElement('div');
+      container.className = 'maplibregl-ctrl maplibregl-ctrl-group map-extra-controls';
+
+      const resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'map-util-btn';
+      resetBtn.title = UI_TEXT.resetTitle;
+      resetBtn.textContent = UI_TEXT.reset;
+      resetBtn.onclick = () => {
+        map.easeTo({
+          center: DEFAULT_VIEW.center,
+          zoom: DEFAULT_VIEW.zoom,
+          bearing: DEFAULT_VIEW.bearing,
+          pitch: DEFAULT_VIEW.pitch,
+          duration: 600
+        });
+      };
+
+      districtToggleButton = document.createElement('button');
+      districtToggleButton.type = 'button';
+      districtToggleButton.className = 'map-util-btn active';
+      districtToggleButton.title = UI_TEXT.bordersTitle;
+      districtToggleButton.textContent = UI_TEXT.borders;
+      districtToggleButton.onclick = () => {
+        showDistricts = !showDistricts;
+        updateDistrictLayers();
+      };
+
+      container.append(resetBtn, districtToggleButton);
+      return container;
+    }
+
+    onRemove() {}
+  }
+
+  map.addControl(new UtilityControl(), 'top-left');
+}
+
+addMapUtilityControls();
 
 function colorExpression() {
   const cfg  = VAR_CONFIG[currentVar];
@@ -116,12 +198,23 @@ function colorExpression() {
 
 map.on('load', () => {
   map.addSource('municipios', {type: 'geojson', data: '../municipios.geojson', generateId: true});
+  map.addSource('districts_31', {type: 'geojson', data: '../districts_31.geojson'});
+  map.addSource('districts_33_36', {type: 'geojson', data: '../districts_33_36.geojson'});
+
   map.addLayer({id: 'municipios-fill', type: 'fill', source: 'municipios',
     paint: {'fill-color': colorExpression(), 'fill-opacity': 0.82}});
   map.addLayer({id: 'municipios-line', type: 'line', source: 'municipios',
     paint: {'line-color': '#888', 'line-width': ['interpolate',['linear'],['zoom'],5,0.4,10,1.2], 'line-opacity': 0.7}});
+  map.addLayer({id: 'districts-31-line', type: 'line', source: 'districts_31',
+    layout: {'visibility': districtLayerVisibility(1931)},
+    paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
+  map.addLayer({id: 'districts-33-36-line', type: 'line', source: 'districts_33_36',
+    layout: {'visibility': districtLayerVisibility(1933)},
+    paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
   map.addLayer({id: 'municipios-hover', type: 'fill', source: 'municipios',
     paint: {'fill-color': '#000', 'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.12,0]}});
+
+  updateDistrictLayers();
 
   let hoveredId = null;
   map.on('mousemove', 'municipios-fill', (e) => {
@@ -169,6 +262,7 @@ function setYear(year, btn) {
   currentYear = year;
   document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  updateDistrictLayers();
   updateMap();
 }
 
