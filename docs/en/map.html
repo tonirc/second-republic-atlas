@@ -186,6 +186,7 @@ ul.task-list li input[type="checkbox"] {
   <button class="var-btn" onclick="setVar('other', this)">Other</button>
   <button class="var-btn" onclick="setVar('blank_null', this)">Blank/Null</button>
   <button class="var-btn" onclick="setVar('turnout', this)">Turnout</button>
+  <button class="var-btn" onclick="setVar('turnout_est', this)">Turnout (est.)</button>
   <div class="toolbar-sep"></div>
   <div class="search-wrap">
     <input class="search-input" id="muni-search" type="text" placeholder="Search municipality…" autocomplete="off" spellcheck="false">
@@ -266,6 +267,12 @@ const VAR_CONFIG = {
     prop: (y) => `turnout_${y}`,
     gradient: 'linear-gradient(to right,#f7fbff,#6baed6,#08306b)',
     ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#f7fbff', 0.4,'#6baed6', 0.7,'#2171b5', 1,'#08306b']
+  },
+  turnout_est: {
+    label: 'Voter turnout (estimated)',
+    prop: (y) => `turnout_est_${y}`,
+    gradient: 'linear-gradient(to right,#fff7f3,#fde0dd,#fa9fb5,#c51b8a,#7a0177)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#fff7f3', 0.25,'#fde0dd', 0.5,'#fa9fb5', 0.75,'#c51b8a', 1,'#7a0177']
   },
 };
 
@@ -979,15 +986,10 @@ function buildPopup(p) {
     </tr>`;
   }).join('');
 
-  const estRow = (currentYear === 1936) ? `<tr>
-    <td style="font-family:'DM Mono',monospace;font-size:0.62rem;text-transform:uppercase;color:#6b5f4e;padding:0.1rem 0.6rem 0.1rem 0;">Turnout (est.)</td>
-    <td style="font-family:'DM Mono',monospace;font-size:0.72rem;text-align:right;">${fmt(p['turnout_est_1936'])}</td>
-  </tr>` : '';
-
   return `<div style="padding:0.25rem 0;">
     <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:0.1rem;">${p.nombre || 'Municipality'}</div>
     <div style="font-family:'DM Mono',monospace;font-size:0.6rem;text-transform:uppercase;color:#6b5f4e;margin-bottom:0.75rem;">${p.provincia || ''} · ${currentYear}</div>
-    <table style="width:100%;border-collapse:collapse;">${rows}${estRow}</table>
+    <table style="width:100%;border-collapse:collapse;">${rows}</table>
   </div>`;
 }
 
