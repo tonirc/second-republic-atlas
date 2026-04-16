@@ -55,6 +55,7 @@ main.content { padding: 0 !important; }
 
 /* ── Language switcher ── */
 .lang-switcher { display: flex; gap: 0.25rem; align-items: center; }
+.masthead .lang-switcher { display: none; }
 .lang-btn {
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -457,15 +458,18 @@ main.content { padding: 0 !important; }
 
 .map-container { position: relative; }
 .map-extra-controls .map-util-btn {
-  min-width: 68px;
-  height: 28px;
+  min-width: 112px;
+  min-height: 30px;
+  padding: 0.3rem 0.45rem;
+  line-height: 1.15;
   border: 0;
   background: #ffffff;
   color: var(--ink);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
+  font-size: 0.56rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
 }
 .map-extra-controls .map-util-btn + .map-util-btn { border-top: 1px solid #e3ddd1; }

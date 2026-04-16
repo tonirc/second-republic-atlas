@@ -167,6 +167,8 @@ map.addControl(new maplibregl.ScaleControl({unit: 'metric'}), 'bottom-left');
 const popup = new maplibregl.Popup({closeButton: false, closeOnClick: false, maxWidth: '300px'});
 
 let districtToggleButton = null;
+let lockedMunicipioId = null;
+let lockedMunicipioProps = null;
 
 function districtLayerVisibility(targetYear) {
   if (!showDistricts) return 'none';
@@ -266,18 +268,63 @@ map.on('load', () => {
   fetch('../municipios.geojson').then(r => r.json()).then(buildSearchIndex);
 
   let hoveredId = null;
+
   map.on('mousemove', 'municipios-fill', (e) => {
     if (!e.features.length) return;
     map.getCanvas().style.cursor = 'pointer';
+    if (lockedMunicipioId !== null) return;
+
     if (hoveredId !== null) map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: false});
     hoveredId = e.features[0].id;
     map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: true});
     popup.setLngLat(e.lngLat).setHTML(buildPopup(e.features[0].properties)).addTo(map);
   });
+
   map.on('mouseleave', 'municipios-fill', () => {
     map.getCanvas().style.cursor = '';
+    if (lockedMunicipioId !== null) return;
+
     if (hoveredId !== null) map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: false});
     hoveredId = null;
+    popup.remove();
+  });
+
+  map.on('click', 'municipios-fill', (e) => {
+    if (!e.features.length) return;
+
+    const feature = e.features[0];
+    const clickedId = feature.id;
+
+    if (lockedMunicipioId === clickedId) {
+      map.setFeatureState({source: 'municipios', id: lockedMunicipioId}, {hover: false});
+      lockedMunicipioId = null;
+      lockedMunicipioProps = null;
+      popup.remove();
+      return;
+    }
+
+    if (hoveredId !== null && hoveredId !== clickedId) {
+      map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: false});
+      hoveredId = null;
+    }
+
+    if (lockedMunicipioId !== null) {
+      map.setFeatureState({source: 'municipios', id: lockedMunicipioId}, {hover: false});
+    }
+
+    lockedMunicipioId = clickedId;
+    lockedMunicipioProps = feature.properties;
+    map.setFeatureState({source: 'municipios', id: lockedMunicipioId}, {hover: true});
+    popup.setLngLat(e.lngLat).setHTML(buildPopup(feature.properties)).addTo(map);
+  });
+
+  map.on('click', (e) => {
+    const clickedMunicipios = map.queryRenderedFeatures(e.point, {layers: ['municipios-fill']});
+    if (clickedMunicipios.length || lockedMunicipioId === null) return;
+
+    map.setFeatureState({source: 'municipios', id: lockedMunicipioId}, {hover: false});
+    lockedMunicipioId = null;
+    lockedMunicipioProps = null;
     popup.remove();
   });
 });
@@ -305,12 +352,18 @@ function buildPopup(p) {
   </div>`;
 }
 
+function updateLockedPopup() {
+  if (!lockedMunicipioProps || !popup.isOpen()) return;
+  popup.setHTML(buildPopup(lockedMunicipioProps));
+}
+
 function setYear(year, btn) {
   currentYear = year;
   document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   updateDistrictLayers();
   updateMap();
+  updateLockedPopup();
 }
 
 function setVar(varKey, btn) {
@@ -319,6 +372,7 @@ function setVar(varKey, btn) {
   btn.classList.add('active');
   updateLegend(VAR_CONFIG[varKey].label, VAR_CONFIG[varKey].gradient);
   updateMap();
+  updateLockedPopup();
 }
 
 function updateMap() {

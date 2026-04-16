@@ -20,10 +20,17 @@ website:
         text: "Métodos"
       - href: contribute.qmd
         text: "Contribuir"
-      - href: about.qmd
-        text: "Sobre el proyecto"
       - href: book.qmd
         text: "El Libro"
+      - href: about.qmd
+        text: "Sobre el proyecto"
+    right:
+      - text: "EN"
+        href: "../en/"
+      - text: "ES"
+        href: "../es/"
+      - text: "CA"
+        href: "../ca/"
 
 format:
   html:
