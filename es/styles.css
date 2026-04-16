@@ -375,6 +375,35 @@ main.content { padding: 0 !important; }
 .sug-name { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink); white-space: nowrap; }
 .sug-prov { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); white-space: nowrap; }
 
+.map-zoom-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.map-filter-select {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  padding: 0.34rem 0.62rem;
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--ink);
+  border-radius: 2px;
+  min-width: 190px;
+  max-width: 230px;
+  outline: none;
+}
+
+.map-filter-select:focus { border-color: var(--ink); }
+
+.map-filter-select:disabled {
+  color: var(--muted);
+  background: #f4efe5;
+  cursor: not-allowed;
+}
+
 /* ── Methods gallery ── */
 .methods-gallery {
   display: grid;
@@ -454,6 +483,20 @@ main.content { padding: 0 !important; }
 
 @media (max-width: 860px) {
   #map { height: calc(100vh - 140px); min-height: 420px; }
+
+  .search-wrap,
+  .map-zoom-filters {
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .map-filter-select {
+    flex: 1 1 230px;
+    max-width: none;
+  }
 }
 
 .map-container { position: relative; }

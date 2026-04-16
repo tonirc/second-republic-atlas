@@ -191,6 +191,14 @@ ul.task-list li input[type="checkbox"] {
     <input class="search-input" id="muni-search" type="text" placeholder="Buscar municipio…" autocomplete="off" spellcheck="false">
     <ul class="search-suggestions" id="search-suggestions" hidden=""></ul>
   </div>
+  <div class="map-zoom-filters">
+    <select class="map-filter-select" id="community-select" aria-label="Seleccionar comunidad autonoma">
+      <option value="">Comunidad autónoma…</option>
+    </select>
+    <select class="map-filter-select" id="district-select" aria-label="Seleccionar distrito">
+      <option value="">Distrito…</option>
+    </select>
+  </div>
   <span class="toolbar-label" style="margin-left:auto;opacity:0.4;font-size:0.6rem;white-space:nowrap;">Cursor sobre municipio para detalles</span>
 </div>
 
@@ -258,6 +266,64 @@ let currentYear = 1936;
 let currentVar  = 'left';
 let showDistricts = true;
 let muniIndex = [];
+let communityIndex = [];
+let districtIndex31 = [];
+let districtIndex33_36 = [];
+
+const PROV_TO_COMMUNITY = {
+  'Albacete': 'Castilla-La Mancha',
+  'Alicante/Alacant': 'Comunitat Valenciana',
+  'Almería': 'Andalucia',
+  'Araba/Álava': 'Pais Vasco',
+  'Asturias': 'Asturias',
+  'Badajoz': 'Extremadura',
+  'Balears, Illes': 'Islas Baleares',
+  'Barcelona': 'Catalunya',
+  'Bizkaia': 'Pais Vasco',
+  'Burgos': 'Castilla y Leon',
+  'Cantabria': 'Cantabria',
+  'Castellón/Castelló': 'Comunitat Valenciana',
+  'Ceuta': 'Ceuta',
+  'Ciudad Real': 'Castilla-La Mancha',
+  'Coruña, A': 'Galicia',
+  'Cuenca': 'Castilla-La Mancha',
+  'Cáceres': 'Extremadura',
+  'Cádiz': 'Andalucia',
+  'Córdoba': 'Andalucia',
+  'Gipuzkoa': 'Pais Vasco',
+  'Girona': 'Catalunya',
+  'Granada': 'Andalucia',
+  'Guadalajara': 'Castilla-La Mancha',
+  'Huelva': 'Andalucia',
+  'Huesca': 'Aragon',
+  'Jaén': 'Andalucia',
+  'León': 'Castilla y Leon',
+  'Lleida': 'Catalunya',
+  'Lugo': 'Galicia',
+  'Madrid': 'Comunidad de Madrid',
+  'Melilla': 'Melilla',
+  'Murcia': 'Region de Murcia',
+  'Málaga': 'Andalucia',
+  'Navarra': 'Navarra',
+  'Ourense': 'Galicia',
+  'Palencia': 'Castilla y Leon',
+  'Palmas, Las': 'Canarias',
+  'Pontevedra': 'Galicia',
+  'Rioja, La': 'La Rioja',
+  'Salamanca': 'Castilla y Leon',
+  'Santa Cruz de Tenerife': 'Canarias',
+  'Segovia': 'Castilla y Leon',
+  'Sevilla': 'Andalucia',
+  'Soria': 'Castilla y Leon',
+  'Tarragona': 'Catalunya',
+  'Teruel': 'Aragon',
+  'Toledo': 'Castilla-La Mancha',
+  'Valencia/València': 'Comunitat Valenciana',
+  'Valladolid': 'Castilla y Leon',
+  'Zamora': 'Castilla y Leon',
+  'Zaragoza': 'Aragon',
+  'Ávila': 'Castilla y Leon'
+};
 
 function flatCoords(geom) {
   if (geom.type === 'Polygon') return geom.coordinates[0];
@@ -277,6 +343,114 @@ function buildSearchIndex(geojson) {
       }
       return {nombre: f.properties.nombre, provincia: f.properties.provincia||'', bbox:[[x0,y0],[x1,y1]]};
     });
+}
+
+function mergeBbox(target, bbox) {
+  if (!bbox) return target;
+  if (!target) return [[bbox[0][0], bbox[0][1]], [bbox[1][0], bbox[1][1]]];
+  target[0][0] = Math.min(target[0][0], bbox[0][0]);
+  target[0][1] = Math.min(target[0][1], bbox[0][1]);
+  target[1][0] = Math.max(target[1][0], bbox[1][0]);
+  target[1][1] = Math.max(target[1][1], bbox[1][1]);
+  return target;
+}
+
+function featureBbox(feature) {
+  const pts = flatCoords(feature.geometry);
+  if (!pts.length) return null;
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  for (const pt of pts) {
+    if (pt[0] < x0) x0 = pt[0];
+    if (pt[0] > x1) x1 = pt[0];
+    if (pt[1] < y0) y0 = pt[1];
+    if (pt[1] > y1) y1 = pt[1];
+  }
+  return [[x0, y0], [x1, y1]];
+}
+
+function buildCommunityIndex(geojson) {
+  const communityBoxes = new Map();
+  geojson.features.forEach((feature) => {
+    const provincia = feature?.properties?.provincia;
+    const community = PROV_TO_COMMUNITY[provincia];
+    if (!community) return;
+    const bbox = featureBbox(feature);
+    if (!bbox) return;
+    const existing = communityBoxes.get(community) || null;
+    communityBoxes.set(community, mergeBbox(existing, bbox));
+  });
+
+  communityIndex = Array.from(communityBoxes.entries())
+    .map(([name, bbox]) => ({name, bbox}))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function buildDistrictIndex(geojson, key) {
+  return geojson.features
+    .filter(f => f.properties && f.properties[key])
+    .map(f => ({name: f.properties[key], bbox: featureBbox(f)}))
+    .filter(d => !!d.bbox)
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function updateDistrictSelectOptions() {
+  const districtSelect = document.getElementById('district-select');
+  if (!districtSelect) return;
+
+  const is1931 = currentYear === 1931;
+  const districts = is1931 ? districtIndex31 : districtIndex33_36;
+  const placeholder = is1931 ? 'Distrito (1931)…' : 'Distrito (1933-1936)…';
+
+  districtSelect.innerHTML = '';
+  const firstOption = document.createElement('option');
+  firstOption.value = '';
+  firstOption.textContent = placeholder;
+  districtSelect.appendChild(firstOption);
+
+  districts.forEach((district, index) => {
+    const option = document.createElement('option');
+    option.value = String(index);
+    option.textContent = district.name;
+    districtSelect.appendChild(option);
+  });
+
+  districtSelect.disabled = districts.length === 0;
+}
+
+function initGeoSelectors() {
+  const communitySelect = document.getElementById('community-select');
+  const districtSelect = document.getElementById('district-select');
+  if (!communitySelect || !districtSelect) return;
+
+  communitySelect.addEventListener('change', () => {
+    const selected = communityIndex.find(c => c.name === communitySelect.value);
+    if (!selected) return;
+    districtSelect.selectedIndex = 0;
+    map.fitBounds(selected.bbox, {padding: 55, maxZoom: 8.5, duration: 800});
+  });
+
+  districtSelect.addEventListener('change', () => {
+    const is1931 = currentYear === 1931;
+    const districts = is1931 ? districtIndex31 : districtIndex33_36;
+    const index = Number(districtSelect.value);
+    if (!Number.isInteger(index) || !districts[index]) return;
+    communitySelect.selectedIndex = 0;
+    map.fitBounds(districts[index].bbox, {padding: 55, maxZoom: 10, duration: 800});
+  });
+}
+
+function fillCommunitySelect() {
+  const communitySelect = document.getElementById('community-select');
+  if (!communitySelect) return;
+
+  communityIndex.forEach((community) => {
+    const option = document.createElement('option');
+    option.value = community.name;
+    option.textContent = community.name;
+    communitySelect.appendChild(option);
+  });
+
+  communitySelect.disabled = communityIndex.length === 0;
 }
 
 function initSearch() {
@@ -397,6 +571,7 @@ function addMapUtilityControls() {
 
 addMapUtilityControls();
 initSearch();
+initGeoSelectors();
 
 function colorExpression() {
   const cfg  = VAR_CONFIG[currentVar];
@@ -424,7 +599,18 @@ map.on('load', () => {
 
   updateDistrictLayers();
 
-  fetch('../municipios.geojson').then(r => r.json()).then(buildSearchIndex);
+  Promise.all([
+    fetch('../municipios.geojson').then(r => r.json()),
+    fetch('../districts_31.geojson').then(r => r.json()),
+    fetch('../districts_33_36.geojson').then(r => r.json())
+  ]).then(([municipiosData, district31Data, district3336Data]) => {
+    buildSearchIndex(municipiosData);
+    buildCommunityIndex(municipiosData);
+    districtIndex31 = buildDistrictIndex(district31Data, 'dist31');
+    districtIndex33_36 = buildDistrictIndex(district3336Data, 'dist33_36');
+    fillCommunitySelect();
+    updateDistrictSelectOptions();
+  });
 
   let hoveredId = null;
 
@@ -520,6 +706,7 @@ function setYear(year, btn) {
   currentYear = year;
   document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  updateDistrictSelectOptions();
   updateDistrictLayers();
   updateMap();
   updateLockedPopup();
