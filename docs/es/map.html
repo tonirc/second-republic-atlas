@@ -326,6 +326,28 @@ const PROV_TO_COMMUNITY = {
   'Ávila': 'Castilla y Leon'
 };
 
+const COMMUNITY_NAME_TO_KEY = {
+  'Andalucia': 'and',
+  'Aragon': 'ara',
+  'Asturias': 'ast',
+  'Canarias': 'canary',
+  'Cantabria': 'can',
+  'Castilla y Leon': 'cyl',
+  'Castilla-La Mancha': 'clm',
+  'Catalunya': 'cat',
+  'Ceuta': 'ceu',
+  'Comunidad de Madrid': 'mad',
+  'Extremadura': 'ext',
+  'Galicia': 'gal',
+  'Islas Baleares': 'bal',
+  'La Rioja': 'rio',
+  'Melilla': 'mel',
+  'Navarra': 'nav',
+  'Pais Vasco': 'pv',
+  'País Valencià': 'val',
+  'Region de Murcia': 'mur'
+};
+
 function flatCoords(geom) {
   if (geom.type === 'Polygon') return geom.coordinates[0];
   if (geom.type === 'MultiPolygon') return geom.coordinates.flat(2);
@@ -384,18 +406,20 @@ function buildCommunityIndex(geojson) {
   });
 
   communityIndex = Array.from(communityBoxes.entries())
-    .map(([name, data]) => ({name, bbox: data.bbox, provinces: Array.from(data.provinces)}))
+    .map(([name, data]) => ({name, key: COMMUNITY_NAME_TO_KEY[name] || null, bbox: data.bbox, provinces: Array.from(data.provinces)}))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
 function resetFocusState() {
   selectedCommunityName = null;
+  selectedCommunityKey = null;
   selectedCommunityProvinces = [];
   selectedDistrictName = null;
 }
 
 function setCommunityFocus(name, provinces) {
   selectedCommunityName = name;
+  selectedCommunityKey = COMMUNITY_NAME_TO_KEY[name] || null;
   selectedCommunityProvinces = provinces || [];
   selectedDistrictName = null;
 }
@@ -403,6 +427,7 @@ function setCommunityFocus(name, provinces) {
 function setDistrictFocus(name) {
   selectedDistrictName = name;
   selectedCommunityName = null;
+  selectedCommunityKey = null;
   selectedCommunityProvinces = [];
 }
 
@@ -430,7 +455,9 @@ function updateFocusVisuals() {
   }
 
   if (map.getLayer('community-focus-outline')) {
-    map.setFilter('community-focus-outline', selectedCommunityFilter());
+    const keyValue = selectedCommunityKey || '__none__';
+    map.setFilter('community-focus-outline', ['==', ['get', 'community_key'], keyValue]);
+    map.setLayoutProperty('community-focus-outline', 'visibility', selectedCommunityKey ? 'visible' : 'none');
   }
 
   const focusYear1931 = currentYear === 1931;
@@ -455,11 +482,22 @@ function updateFocusVisuals() {
 }
 
 function buildDistrictIndex(geojson, key) {
-  return geojson.features
+  const rows = geojson.features
     .filter(f => f.properties && f.properties[key])
     .map(f => ({name: f.properties[key], bbox: featureBbox(f)}))
     .filter(d => !!d.bbox)
     .sort((a, b) => a.name.localeCompare(b.name));
+
+  if (key === 'dist33_36' && !rows.some(d => d.name === 'Barcelona (provincia)')) {
+    const barcelonaRows = muniIndex.filter(m => m.provincia === 'Barcelona' && m.bbox);
+    if (barcelonaRows.length) {
+      const merged = barcelonaRows.reduce((acc, m) => mergeBbox(acc, m.bbox), null);
+      rows.push({name: 'Barcelona (provincia)', bbox: merged});
+      rows.sort((a, b) => a.name.localeCompare(b.name));
+    }
+  }
+
+  return rows;
 }
 
 function updateDistrictSelectOptions() {
@@ -625,6 +663,7 @@ let lockedMunicipioProps = null;
 let hoveredId = null;
 let currentBasemap = 'light';
 let selectedCommunityName = null;
+let selectedCommunityKey = null;
 let selectedCommunityProvinces = [];
 let selectedDistrictName = null;
 
@@ -719,6 +758,13 @@ function addMapUtilityControls() {
       resetBtn.title = UI_TEXT.resetTitle;
       resetBtn.textContent = UI_TEXT.reset;
       resetBtn.onclick = () => {
+        resetFocusState();
+        const communitySelect = document.getElementById('community-select');
+        const districtSelect = document.getElementById('district-select');
+        if (communitySelect) communitySelect.selectedIndex = 0;
+        if (districtSelect) districtSelect.selectedIndex = 0;
+        showSelectionNotice('', '');
+        updateFocusVisuals();
         map.easeTo({
           center: DEFAULT_VIEW.center,
           zoom: DEFAULT_VIEW.zoom,
@@ -840,6 +886,9 @@ function ensureElectionLayers() {
   if (!map.getSource('districts_33_36')) {
     map.addSource('districts_33_36', {type: 'geojson', data: '../districts_33_36.geojson'});
   }
+  if (!map.getSource('communities')) {
+    map.addSource('communities', {type: 'geojson', data: '../communities.geojson'});
+  }
 
   if (!map.getLayer('municipios-fill')) {
     map.addLayer({id: 'municipios-fill', type: 'fill', source: 'municipios',
@@ -884,7 +933,8 @@ function ensureElectionLayers() {
       paint: {'line-color': '#141414', 'line-width': ['interpolate',['linear'],['zoom'],4,1.2,8,2.2,12,3.2], 'line-opacity': 0.95}});
   }
   if (!map.getLayer('community-focus-outline')) {
-    map.addLayer({id: 'community-focus-outline', type: 'line', source: 'municipios',
+    map.addLayer({id: 'community-focus-outline', type: 'line', source: 'communities',
+      layout: {'visibility': 'none'},
       paint: {'line-color': '#141414', 'line-width': ['interpolate',['linear'],['zoom'],4,1.1,8,1.8,12,2.8], 'line-opacity': 0.95}});
   }
 
