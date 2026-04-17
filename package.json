@@ -1,0 +1,10 @@
+{
+  "name": "second-republic-atlas",
+  "private": true,
+  "scripts": {
+    "test:map-smoke": "playwright test tests/map-smoke.spec.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1"
+  }
+}
