@@ -1,0 +1,70 @@
+name: Map Smoke Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'en/map.qmd'
+      - 'es/map.qmd'
+      - 'ca/map.qmd'
+      - 'docs/en/map.html'
+      - 'docs/es/map.html'
+      - 'docs/ca/map.html'
+      - 'docs/municipios.geojson'
+      - 'docs/districts_31.geojson'
+      - 'docs/districts_33_36.geojson'
+      - 'docs/communities.geojson'
+      - 'data/municipios.geojson'
+      - 'data/districts_31.geojson'
+      - 'data/districts_33_36.geojson'
+      - 'data/communities.geojson'
+      - 'tests/map-smoke.spec.js'
+      - 'playwright.config.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/map-smoke.yml'
+  pull_request:
+    paths:
+      - 'en/map.qmd'
+      - 'es/map.qmd'
+      - 'ca/map.qmd'
+      - 'docs/en/map.html'
+      - 'docs/es/map.html'
+      - 'docs/ca/map.html'
+      - 'docs/municipios.geojson'
+      - 'docs/districts_31.geojson'
+      - 'docs/districts_33_36.geojson'
+      - 'docs/communities.geojson'
+      - 'data/municipios.geojson'
+      - 'data/districts_31.geojson'
+      - 'data/districts_33_36.geojson'
+      - 'data/communities.geojson'
+      - 'tests/map-smoke.spec.js'
+      - 'playwright.config.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/map-smoke.yml'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run map smoke tests
+        run: npm run test:map-smoke

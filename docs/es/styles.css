@@ -216,19 +216,19 @@ main.content { padding: 0 !important; }
 }
 /* Once you add real logos, use: */
 .logo-img {
-  max-height: 70px;
-  max-width: 160px;
+  max-height: 90px;
+  max-width: 200px;
   object-fit: contain;
   filter: grayscale(20%);
   transition: filter 0.2s;
 }
 .logo-img:hover { filter: none; }
-.logo-caption {
+.logo-funding {
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--muted);
+  text-align: center;
 }
 .logo-bar-divider {
   width: 1px;
@@ -329,8 +329,10 @@ main.content { padding: 0 !important; }
 /* ── Map page ── */
 .map-page-shell {
   width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 64px);
 }
 
 /* ── Search widget ── */
@@ -479,11 +481,9 @@ main.content { padding: 0 !important; }
 .year-btn:hover, .var-btn:hover { border-color: var(--ink); color: var(--ink); }
 .year-btn.active, .var-btn.active { background: var(--ink); color: var(--parchment); border-color: var(--ink); }
 
-#map { width: 100%; height: calc(100vh - 92px); min-height: 520px; }
+#map { width: 100%; height: 100%; min-height: 400px; }
 
 @media (max-width: 860px) {
-  #map { height: calc(100vh - 140px); min-height: 420px; }
-
   .search-wrap,
   .map-zoom-filters {
     width: 100%;
@@ -499,7 +499,46 @@ main.content { padding: 0 !important; }
   }
 }
 
-.map-container { position: relative; }
+.map-container { position: relative; flex: 1; min-height: 0; }
+.map-selection-notice {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 12;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px var(--shadow);
+  border-radius: 3px;
+  padding: 0.45rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink);
+  pointer-events: none;
+  max-width: min(320px, calc(100% - 2rem));
+}
+
+.map-selection-notice[hidden] { display: none; }
+
+.map-basemap-control {
+  padding: 2px;
+  background: #ffffff;
+}
+
+.map-basemap-select {
+  border: 0;
+  background: #ffffff;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.32rem 0.5rem;
+  min-width: 130px;
+  outline: none;
+}
+
 .map-extra-controls .map-util-btn {
   min-width: 112px;
   min-height: 30px;

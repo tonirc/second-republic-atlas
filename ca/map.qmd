@@ -7,6 +7,7 @@ format:
       text: |
         <link href="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.css" rel="stylesheet">
         <script src="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.js"></script>
+        <style>#title-block-header { display: none !important; }</style>
 ---
 
 ```{=html}
@@ -26,6 +27,7 @@ format:
   <button class="var-btn" onclick="setVar('other', this)">Altres</button>
   <button class="var-btn" onclick="setVar('blank_null', this)">Blancs/Nuls</button>
   <button class="var-btn" onclick="setVar('turnout', this)">Participació</button>
+  <button class="var-btn" onclick="setVar('turnout_est', this)">Participació (est.)</button>
   <div class="toolbar-sep"></div>
   <div class="search-wrap">
     <input class="search-input" id="muni-search" type="text" placeholder="Cerca municipi…" autocomplete="off" spellcheck="false">
@@ -45,6 +47,7 @@ format:
 <!-- MAP -->
 <div class="map-container">
   <div id="map"></div>
+  <div class="map-selection-notice" id="selection-notice" hidden></div>
   <div class="map-legend">
     <div class="legend-title" id="legend-title">Coalició d'esquerres</div>
     <div class="legend-gradient" id="legend-gradient"
@@ -101,6 +104,12 @@ const VAR_CONFIG = {
     gradient: 'linear-gradient(to right,#f7fbff,#6baed6,#08306b)',
     ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#f7fbff', 0.4,'#6baed6', 0.7,'#2171b5', 1,'#08306b']
   },
+  turnout_est: {
+    label: 'Participació electoral (estimada)',
+    prop: (y) => `turnout_est_${y}`,
+    gradient: 'linear-gradient(to right,#fff7f3,#fde0dd,#fa9fb5,#c51b8a,#7a0177)',
+    ramp: (p) => ['interpolate',['linear'],['get',p], 0,'#fff7f3', 0.25,'#fde0dd', 0.5,'#fa9fb5', 0.75,'#c51b8a', 1,'#7a0177']
+  },
 };
 
 let currentYear = 1936;
@@ -113,7 +122,7 @@ let districtIndex33_36 = [];
 
 const PROV_TO_COMMUNITY = {
   'Albacete': 'Castella-La Manxa',
-  'Alicante/Alacant': 'Comunitat Valenciana',
+  'Alicante/Alacant': 'País Valencià',
   'Almería': 'Andalusia',
   'Araba/Álava': 'Pais Basc',
   'Asturias': 'Asturies',
@@ -123,7 +132,7 @@ const PROV_TO_COMMUNITY = {
   'Bizkaia': 'Pais Basc',
   'Burgos': 'Castella i Lleo',
   'Cantabria': 'Cantabria',
-  'Castellón/Castelló': 'Comunitat Valenciana',
+  'Castellón/Castelló': 'País Valencià',
   'Ceuta': 'Ceuta',
   'Ciudad Real': 'Castella-La Manxa',
   'Coruña, A': 'Galicia',
@@ -159,11 +168,33 @@ const PROV_TO_COMMUNITY = {
   'Tarragona': 'Catalunya',
   'Teruel': 'Arago',
   'Toledo': 'Castella-La Manxa',
-  'Valencia/València': 'Comunitat Valenciana',
+  'Valencia/València': 'País Valencià',
   'Valladolid': 'Castella i Lleo',
   'Zamora': 'Castella i Lleo',
   'Zaragoza': 'Arago',
   'Ávila': 'Castella i Lleo'
+};
+
+const COMMUNITY_NAME_TO_KEY = {
+  'Andalusia': 'and',
+  'Arago': 'ara',
+  'Asturies': 'ast',
+  'Canaries': 'canary',
+  'Cantabria': 'can',
+  'Castella i Lleo': 'cyl',
+  'Castella-La Manxa': 'clm',
+  'Catalunya': 'cat',
+  'Ceuta': 'ceu',
+  'Comunitat de Madrid': 'mad',
+  'Extremadura': 'ext',
+  'Galicia': 'gal',
+  'Illes Balears': 'bal',
+  'La Rioja': 'rio',
+  'Melilla': 'mel',
+  'Navarra': 'nav',
+  'Pais Basc': 'pv',
+  'País Valencià': 'val',
+  'Regio de Murcia': 'mur'
 };
 
 function flatCoords(geom) {
@@ -217,21 +248,105 @@ function buildCommunityIndex(geojson) {
     if (!community) return;
     const bbox = featureBbox(feature);
     if (!bbox) return;
-    const existing = communityBoxes.get(community) || null;
-    communityBoxes.set(community, mergeBbox(existing, bbox));
+    const existing = communityBoxes.get(community) || {bbox: null, provinces: new Set()};
+    existing.bbox = mergeBbox(existing.bbox, bbox);
+    existing.provinces.add(provincia);
+    communityBoxes.set(community, existing);
   });
 
   communityIndex = Array.from(communityBoxes.entries())
-    .map(([name, bbox]) => ({name, bbox}))
+    .map(([name, data]) => ({name, key: COMMUNITY_NAME_TO_KEY[name] || null, bbox: data.bbox, provinces: Array.from(data.provinces)}))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+function resetFocusState() {
+  selectedCommunityName = null;
+  selectedCommunityKey = null;
+  selectedCommunityProvinces = [];
+  selectedDistrictName = null;
+}
+
+function setCommunityFocus(name, provinces) {
+  selectedCommunityName = name;
+  selectedCommunityKey = COMMUNITY_NAME_TO_KEY[name] || null;
+  selectedCommunityProvinces = provinces || [];
+  selectedDistrictName = null;
+}
+
+function setDistrictFocus(name) {
+  selectedDistrictName = name;
+  selectedCommunityName = null;
+  selectedCommunityKey = null;
+  selectedCommunityProvinces = [];
+}
+
+function emptyFilter() {
+  return ['==', ['get', 'cod_muni'], '__none__'];
+}
+
+function selectedCommunityFilter() {
+  if (!selectedCommunityProvinces.length) return emptyFilter();
+  return ['in', ['get', 'provincia'], ['literal', selectedCommunityProvinces]];
+}
+
+function updateFocusVisuals() {
+  if (!map.getLayer('municipios-fill')) return;
+
+  if (selectedCommunityName && selectedCommunityProvinces.length) {
+    map.setPaintProperty('municipios-fill', 'fill-opacity', [
+      'case',
+      selectedCommunityFilter(),
+      0.86,
+      0.26
+    ]);
+  } else {
+    map.setPaintProperty('municipios-fill', 'fill-opacity', 0.82);
+  }
+
+  if (map.getLayer('community-focus-outline')) {
+    const keyValue = selectedCommunityKey || '__none__';
+    map.setFilter('community-focus-outline', ['==', ['get', 'community_key'], keyValue]);
+    map.setLayoutProperty('community-focus-outline', 'visibility', selectedCommunityKey ? 'visible' : 'none');
+  }
+
+  const focusYear1931 = currentYear === 1931;
+  const districtName = selectedDistrictName || '__none__';
+
+  if (map.getLayer('district-focus-mask-31')) {
+    map.setLayoutProperty('district-focus-mask-31', 'visibility', focusYear1931 && selectedDistrictName ? 'visible' : 'none');
+    map.setFilter('district-focus-mask-31', ['!=', ['get', 'dist31'], districtName]);
+  }
+  if (map.getLayer('district-focus-outline-31')) {
+    map.setLayoutProperty('district-focus-outline-31', 'visibility', focusYear1931 && selectedDistrictName ? 'visible' : 'none');
+    map.setFilter('district-focus-outline-31', ['==', ['get', 'dist31'], districtName]);
+  }
+  if (map.getLayer('district-focus-mask-33-36')) {
+    map.setLayoutProperty('district-focus-mask-33-36', 'visibility', !focusYear1931 && selectedDistrictName ? 'visible' : 'none');
+    map.setFilter('district-focus-mask-33-36', ['!=', ['get', 'dist33_36'], districtName]);
+  }
+  if (map.getLayer('district-focus-outline-33-36')) {
+    map.setLayoutProperty('district-focus-outline-33-36', 'visibility', !focusYear1931 && selectedDistrictName ? 'visible' : 'none');
+    map.setFilter('district-focus-outline-33-36', ['==', ['get', 'dist33_36'], districtName]);
+  }
+}
+
 function buildDistrictIndex(geojson, key) {
-  return geojson.features
+  const rows = geojson.features
     .filter(f => f.properties && f.properties[key])
     .map(f => ({name: f.properties[key], bbox: featureBbox(f)}))
     .filter(d => !!d.bbox)
     .sort((a, b) => a.name.localeCompare(b.name));
+
+  if (key === 'dist33_36' && !rows.some(d => d.name === 'Barcelona (provincia)')) {
+    const barcelonaRows = muniIndex.filter(m => m.provincia === 'Barcelona' && m.bbox);
+    if (barcelonaRows.length) {
+      const merged = barcelonaRows.reduce((acc, m) => mergeBbox(acc, m.bbox), null);
+      rows.push({name: 'Barcelona (provincia)', bbox: merged});
+      rows.sort((a, b) => a.name.localeCompare(b.name));
+    }
+  }
+
+  return rows;
 }
 
 function updateDistrictSelectOptions() {
@@ -265,18 +380,34 @@ function initGeoSelectors() {
 
   communitySelect.addEventListener('change', () => {
     const selected = communityIndex.find(c => c.name === communitySelect.value);
-    if (!selected) return;
+    if (!selected) {
+      resetFocusState();
+      updateFocusVisuals();
+      showSelectionNotice('', '');
+      return;
+    }
     districtSelect.selectedIndex = 0;
+    setCommunityFocus(selected.name, selected.provinces);
+    updateFocusVisuals();
     map.fitBounds(selected.bbox, {padding: 55, maxZoom: 8.5, duration: 800});
+    showSelectionNotice(UI_TEXT.selectedCommunity, selected.name);
   });
 
   districtSelect.addEventListener('change', () => {
     const is1931 = currentYear === 1931;
     const districts = is1931 ? districtIndex31 : districtIndex33_36;
     const index = Number(districtSelect.value);
-    if (!Number.isInteger(index) || !districts[index]) return;
+    if (!Number.isInteger(index) || !districts[index]) {
+      resetFocusState();
+      updateFocusVisuals();
+      showSelectionNotice('', '');
+      return;
+    }
     communitySelect.selectedIndex = 0;
+    setDistrictFocus(districts[index].name);
+    updateFocusVisuals();
     map.fitBounds(districts[index].bbox, {padding: 55, maxZoom: 10, duration: 800});
+    showSelectionNotice(UI_TEXT.selectedDistrict, districts[index].name);
   });
 }
 
@@ -328,12 +459,47 @@ const UI_TEXT = {
   reset: 'Reinicia zoom',
   resetTitle: 'Torna al zoom inicial',
   borders: 'Districtes',
-  bordersTitle: 'Mostra o amaga els limits de districte'
+  bordersTitle: 'Mostra o amaga els limits de districte',
+  selectedCommunity: 'Comunitat autonoma',
+  selectedDistrict: 'Districte'
 };
+
+const BASEMAPS = {
+  light: {
+    label: 'Clar',
+    tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', 'https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', 'https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+  },
+  streets: {
+    label: 'Carrers',
+    tiles: ['https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', 'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', 'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png'],
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+  },
+  satellite: {
+    label: 'Satel.lit',
+    tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+    attribution: 'Tiles &copy; Esri'
+  }
+};
+
+function showSelectionNotice(kind, name) {
+  const notice = document.getElementById('selection-notice');
+  if (!notice) return;
+  if (!name) {
+    notice.hidden = true;
+    return;
+  }
+  notice.textContent = `${kind}: ${name}`;
+  notice.hidden = false;
+}
 
 const map = new maplibregl.Map({
   container: 'map',
-  style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+  style: {
+    version: 8,
+    sources: {},
+    layers: [{id: 'bg', type: 'background', paint: {'background-color': '#f5f0e8'}}]
+  },
   center: DEFAULT_VIEW.center, zoom: DEFAULT_VIEW.zoom, minZoom: 4, maxZoom: 14
 });
 map.addControl(new maplibregl.NavigationControl(), 'top-left');
@@ -343,6 +509,66 @@ const popup = new maplibregl.Popup({closeButton: false, closeOnClick: false, max
 let districtToggleButton = null;
 let lockedMunicipioId = null;
 let lockedMunicipioProps = null;
+let hoveredId = null;
+let currentBasemap = 'light';
+let selectedCommunityName = null;
+let selectedCommunityKey = null;
+let selectedCommunityProvinces = [];
+let selectedDistrictName = null;
+
+const geoDataPromise = Promise.all([
+  fetch('../municipios.geojson').then(r => r.json()),
+  fetch('../districts_31.geojson').then(r => r.json()),
+  fetch('../districts_33_36.geojson').then(r => r.json())
+]);
+
+function applyBasemap(key) {
+  const cfg = BASEMAPS[key];
+  if (!cfg) return;
+  currentBasemap = key;
+
+  if (map.getLayer('basemap-layer')) map.removeLayer('basemap-layer');
+  if (map.getSource('basemap-source')) map.removeSource('basemap-source');
+
+  map.addSource('basemap-source', {
+    type: 'raster',
+    tiles: cfg.tiles,
+    tileSize: 256,
+    attribution: cfg.attribution
+  });
+
+  const beforeId = map.getLayer('municipios-fill') ? 'municipios-fill' : undefined;
+  map.addLayer({id: 'basemap-layer', type: 'raster', source: 'basemap-source'}, beforeId);
+}
+
+function addBasemapControl() {
+  class BasemapControl {
+    onAdd() {
+      const container = document.createElement('div');
+      container.className = 'maplibregl-ctrl maplibregl-ctrl-group map-basemap-control';
+
+      const select = document.createElement('select');
+      select.className = 'map-basemap-select';
+      select.setAttribute('aria-label', 'Seleccionar mapa base');
+
+      Object.entries(BASEMAPS).forEach(([key, cfg]) => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = cfg.label;
+        select.appendChild(option);
+      });
+
+      select.value = currentBasemap;
+      select.addEventListener('change', () => applyBasemap(select.value));
+      container.appendChild(select);
+      return container;
+    }
+
+    onRemove() {}
+  }
+
+  map.addControl(new BasemapControl(), 'top-right');
+}
 
 function districtLayerVisibility(targetYear) {
   if (!showDistricts) return 'none';
@@ -381,6 +607,13 @@ function addMapUtilityControls() {
       resetBtn.title = UI_TEXT.resetTitle;
       resetBtn.textContent = UI_TEXT.reset;
       resetBtn.onclick = () => {
+        resetFocusState();
+        const communitySelect = document.getElementById('community-select');
+        const districtSelect = document.getElementById('district-select');
+        if (communitySelect) communitySelect.selectedIndex = 0;
+        if (districtSelect) districtSelect.selectedIndex = 0;
+        showSelectionNotice('', '');
+        updateFocusVisuals();
         map.easeTo({
           center: DEFAULT_VIEW.center,
           zoom: DEFAULT_VIEW.zoom,
@@ -411,6 +644,7 @@ function addMapUtilityControls() {
 }
 
 addMapUtilityControls();
+addBasemapControl();
 initSearch();
 initGeoSelectors();
 
@@ -420,42 +654,7 @@ function colorExpression() {
   return ['case', ['!', ['has', prop]], '#cccccc', ['==', ['get', prop], null], '#cccccc', cfg.ramp(prop)];
 }
 
-map.on('load', () => {
-  map.addSource('municipios', {type: 'geojson', data: '../municipios.geojson', generateId: true});
-  map.addSource('districts_31', {type: 'geojson', data: '../districts_31.geojson'});
-  map.addSource('districts_33_36', {type: 'geojson', data: '../districts_33_36.geojson'});
-
-  map.addLayer({id: 'municipios-fill', type: 'fill', source: 'municipios',
-    paint: {'fill-color': colorExpression(), 'fill-opacity': 0.82}});
-  map.addLayer({id: 'municipios-line', type: 'line', source: 'municipios',
-    paint: {'line-color': '#888', 'line-width': ['interpolate',['linear'],['zoom'],5,0.4,10,1.2], 'line-opacity': 0.7}});
-  map.addLayer({id: 'districts-31-line', type: 'line', source: 'districts_31',
-    layout: {'visibility': districtLayerVisibility(1931)},
-    paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
-  map.addLayer({id: 'districts-33-36-line', type: 'line', source: 'districts_33_36',
-    layout: {'visibility': districtLayerVisibility(1933)},
-    paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
-  map.addLayer({id: 'municipios-hover', type: 'fill', source: 'municipios',
-    paint: {'fill-color': '#000', 'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.12,0]}});
-
-  updateDistrictLayers();
-
-  Promise.all([
-    fetch('../municipios.geojson').then(r => r.json()),
-    fetch('../districts_31.geojson').then(r => r.json()),
-    fetch('../districts_33_36.geojson').then(r => r.json())
-  ]).then(([municipiosData, district31Data, district3336Data]) => {
-    buildSearchIndex(municipiosData);
-    buildCommunityIndex(municipiosData);
-    districtIndex31 = buildDistrictIndex(district31Data, 'dist31');
-    districtIndex33_36 = buildDistrictIndex(district3336Data, 'dist33_36');
-    fillCommunitySelect();
-    updateDistrictSelectOptions();
-  });
-
-  let hoveredId = null;
-
-  map.on('mousemove', 'municipios-fill', (e) => {
+function handleMunicipioMousemove(e) {
     if (!e.features.length) return;
     map.getCanvas().style.cursor = 'pointer';
     if (lockedMunicipioId !== null) return;
@@ -464,18 +663,18 @@ map.on('load', () => {
     hoveredId = e.features[0].id;
     map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: true});
     popup.setLngLat(e.lngLat).setHTML(buildPopup(e.features[0].properties)).addTo(map);
-  });
+}
 
-  map.on('mouseleave', 'municipios-fill', () => {
+function handleMunicipioMouseleave() {
     map.getCanvas().style.cursor = '';
     if (lockedMunicipioId !== null) return;
 
     if (hoveredId !== null) map.setFeatureState({source: 'municipios', id: hoveredId}, {hover: false});
     hoveredId = null;
     popup.remove();
-  });
+}
 
-  map.on('click', 'municipios-fill', (e) => {
+function handleMunicipioClick(e) {
     if (!e.features.length) return;
 
     const feature = e.features[0];
@@ -502,9 +701,9 @@ map.on('load', () => {
     lockedMunicipioProps = feature.properties;
     map.setFeatureState({source: 'municipios', id: lockedMunicipioId}, {hover: true});
     popup.setLngLat(e.lngLat).setHTML(buildPopup(feature.properties)).addTo(map);
-  });
+}
 
-  map.on('click', (e) => {
+function handleMapClick(e) {
     const clickedMunicipios = map.queryRenderedFeatures(e.point, {layers: ['municipios-fill']});
     if (clickedMunicipios.length || lockedMunicipioId === null) return;
 
@@ -512,7 +711,101 @@ map.on('load', () => {
     lockedMunicipioId = null;
     lockedMunicipioProps = null;
     popup.remove();
-  });
+}
+
+function bindMunicipioHandlers() {
+  map.off('mousemove', 'municipios-fill', handleMunicipioMousemove);
+  map.off('mouseleave', 'municipios-fill', handleMunicipioMouseleave);
+  map.off('click', 'municipios-fill', handleMunicipioClick);
+  map.off('click', handleMapClick);
+
+  map.on('mousemove', 'municipios-fill', handleMunicipioMousemove);
+  map.on('mouseleave', 'municipios-fill', handleMunicipioMouseleave);
+  map.on('click', 'municipios-fill', handleMunicipioClick);
+  map.on('click', handleMapClick);
+}
+
+function ensureElectionLayers() {
+  if (!map.getSource('municipios')) {
+    map.addSource('municipios', {type: 'geojson', data: '../municipios.geojson', generateId: true});
+  }
+  if (!map.getSource('districts_31')) {
+    map.addSource('districts_31', {type: 'geojson', data: '../districts_31.geojson'});
+  }
+  if (!map.getSource('districts_33_36')) {
+    map.addSource('districts_33_36', {type: 'geojson', data: '../districts_33_36.geojson'});
+  }
+  if (!map.getSource('communities')) {
+    map.addSource('communities', {type: 'geojson', data: '../communities.geojson'});
+  }
+
+  if (!map.getLayer('municipios-fill')) {
+    map.addLayer({id: 'municipios-fill', type: 'fill', source: 'municipios',
+      paint: {'fill-color': colorExpression(), 'fill-opacity': 0.82}});
+  }
+  if (!map.getLayer('municipios-line')) {
+    map.addLayer({id: 'municipios-line', type: 'line', source: 'municipios',
+      paint: {'line-color': '#888', 'line-width': ['interpolate',['linear'],['zoom'],5,0.4,10,1.2], 'line-opacity': 0.7}});
+  }
+  if (!map.getLayer('district-focus-mask-31')) {
+    map.addLayer({id: 'district-focus-mask-31', type: 'fill', source: 'districts_31',
+      layout: {'visibility': 'none'},
+      paint: {'fill-color': '#ffffff', 'fill-opacity': 0.28}}, 'municipios-line');
+  }
+  if (!map.getLayer('district-focus-mask-33-36')) {
+    map.addLayer({id: 'district-focus-mask-33-36', type: 'fill', source: 'districts_33_36',
+      layout: {'visibility': 'none'},
+      paint: {'fill-color': '#ffffff', 'fill-opacity': 0.28}}, 'municipios-line');
+  }
+  if (!map.getLayer('districts-31-line')) {
+    map.addLayer({id: 'districts-31-line', type: 'line', source: 'districts_31',
+      layout: {'visibility': districtLayerVisibility(1931)},
+      paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
+  }
+  if (!map.getLayer('districts-33-36-line')) {
+    map.addLayer({id: 'districts-33-36-line', type: 'line', source: 'districts_33_36',
+      layout: {'visibility': districtLayerVisibility(1933)},
+      paint: {'line-color': '#1f1f1f', 'line-width': ['interpolate',['linear'],['zoom'],4,0.5,8,1.1,12,1.8], 'line-opacity': 0.42}});
+  }
+  if (!map.getLayer('municipios-hover')) {
+    map.addLayer({id: 'municipios-hover', type: 'fill', source: 'municipios',
+      paint: {'fill-color': '#000', 'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.12,0]}});
+  }
+  if (!map.getLayer('district-focus-outline-31')) {
+    map.addLayer({id: 'district-focus-outline-31', type: 'line', source: 'districts_31',
+      layout: {'visibility': 'none'},
+      paint: {'line-color': '#141414', 'line-width': ['interpolate',['linear'],['zoom'],4,1.2,8,2.2,12,3.2], 'line-opacity': 0.95}});
+  }
+  if (!map.getLayer('district-focus-outline-33-36')) {
+    map.addLayer({id: 'district-focus-outline-33-36', type: 'line', source: 'districts_33_36',
+      layout: {'visibility': 'none'},
+      paint: {'line-color': '#141414', 'line-width': ['interpolate',['linear'],['zoom'],4,1.2,8,2.2,12,3.2], 'line-opacity': 0.95}});
+  }
+  if (!map.getLayer('community-focus-outline')) {
+    map.addLayer({id: 'community-focus-outline', type: 'line', source: 'communities',
+      layout: {'visibility': 'none'},
+      paint: {'line-color': '#141414', 'line-width': ['interpolate',['linear'],['zoom'],4,1.1,8,1.8,12,2.8], 'line-opacity': 0.95}});
+  }
+
+  updateDistrictLayers();
+  updateMap();
+  updateFocusVisuals();
+  updateLockedPopup();
+  bindMunicipioHandlers();
+}
+
+geoDataPromise.then(([municipiosData, district31Data, district3336Data]) => {
+  buildSearchIndex(municipiosData);
+  buildCommunityIndex(municipiosData);
+  districtIndex31 = buildDistrictIndex(district31Data, 'dist31');
+  districtIndex33_36 = buildDistrictIndex(district3336Data, 'dist33_36');
+  fillCommunitySelect();
+  updateDistrictSelectOptions();
+});
+
+map.on('style.load', () => {
+  applyBasemap(currentBasemap);
+  ensureElectionLayers();
 });
 
 function buildPopup(p) {
@@ -526,15 +819,10 @@ function buildPopup(p) {
     </tr>`;
   }).join('');
 
-  const estRow = (currentYear === 1936) ? `<tr>
-    <td style="font-family:'DM Mono',monospace;font-size:0.62rem;text-transform:uppercase;color:#6b5f4e;padding:0.1rem 0.6rem 0.1rem 0;">Participació (est.)</td>
-    <td style="font-family:'DM Mono',monospace;font-size:0.72rem;text-align:right;">${fmt(p['turnout_est_1936'])}</td>
-  </tr>` : '';
-
   return `<div style="padding:0.25rem 0;">
     <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:0.1rem;">${p.nombre || 'Municipi'}</div>
     <div style="font-family:'DM Mono',monospace;font-size:0.6rem;text-transform:uppercase;color:#6b5f4e;margin-bottom:0.75rem;">${p.provincia || ''} · ${currentYear}</div>
-    <table style="width:100%;border-collapse:collapse;">${rows}${estRow}</table>
+    <table style="width:100%;border-collapse:collapse;">${rows}</table>
   </div>`;
 }
 
@@ -547,8 +835,15 @@ function setYear(year, btn) {
   currentYear = year;
   document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  if (selectedDistrictName) {
+    selectedDistrictName = null;
+    const districtSelect = document.getElementById('district-select');
+    if (districtSelect) districtSelect.selectedIndex = 0;
+    showSelectionNotice('', '');
+  }
   updateDistrictSelectOptions();
   updateDistrictLayers();
+  updateFocusVisuals();
   updateMap();
   updateLockedPopup();
 }

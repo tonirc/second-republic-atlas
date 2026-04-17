@@ -31,12 +31,11 @@ format:
 <div class="logo-bar">
   <div class="logo-bar-item">
     <img src="../en/images/upf-logo.png" class="logo-img" alt="UPF">
-    <span class="logo-caption">Universitat Pompeu Fabra</span>
   </div>
   <div class="logo-bar-divider"></div>
   <div class="logo-bar-item">
+    <span class="logo-funding">Proyecto PID2023-152743NB-I00 financiado por:</span>
     <img src="../en/images/ministerio-logo.png" class="logo-img" alt="Ministerio de Ciencia">
-    <span class="logo-caption">Ministerio de Ciencia e Innovación</span>
   </div>
 </div>
 
